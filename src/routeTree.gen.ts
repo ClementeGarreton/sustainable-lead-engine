@@ -10,12 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OfertaRouteImport } from './routes/oferta'
+import { Route as CategoriasRouteImport } from './routes/categorias'
+import { Route as BuscarRouteImport } from './routes/buscar'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VendedoresSlugRouteImport } from './routes/vendedores.$slug'
 import { Route as OfertaSlugRouteImport } from './routes/oferta.$slug'
+import { Route as CategoriasSlugRouteImport } from './routes/categorias.$slug'
 
 const OfertaRoute = OfertaRouteImport.update({
   id: '/oferta',
   path: '/oferta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriasRoute = CategoriasRouteImport.update({
+  id: '/categorias',
+  path: '/categorias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuscarRoute = BuscarRouteImport.update({
+  id: '/buscar',
+  path: '/buscar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -23,39 +37,86 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendedoresSlugRoute = VendedoresSlugRouteImport.update({
+  id: '/vendedores/$slug',
+  path: '/vendedores/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OfertaSlugRoute = OfertaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => OfertaRoute,
 } as any)
+const CategoriasSlugRoute = CategoriasSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CategoriasRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/categorias': typeof CategoriasRouteWithChildren
   '/oferta': typeof OfertaRouteWithChildren
+  '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
+  '/vendedores/$slug': typeof VendedoresSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/categorias': typeof CategoriasRouteWithChildren
   '/oferta': typeof OfertaRouteWithChildren
+  '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
+  '/vendedores/$slug': typeof VendedoresSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/categorias': typeof CategoriasRouteWithChildren
   '/oferta': typeof OfertaRouteWithChildren
+  '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
+  '/vendedores/$slug': typeof VendedoresSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/oferta' | '/oferta/$slug'
+  fullPaths:
+    | '/'
+    | '/buscar'
+    | '/categorias'
+    | '/oferta'
+    | '/categorias/$slug'
+    | '/oferta/$slug'
+    | '/vendedores/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/oferta' | '/oferta/$slug'
-  id: '__root__' | '/' | '/oferta' | '/oferta/$slug'
+  to:
+    | '/'
+    | '/buscar'
+    | '/categorias'
+    | '/oferta'
+    | '/categorias/$slug'
+    | '/oferta/$slug'
+    | '/vendedores/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/buscar'
+    | '/categorias'
+    | '/oferta'
+    | '/categorias/$slug'
+    | '/oferta/$slug'
+    | '/vendedores/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuscarRoute: typeof BuscarRoute
+  CategoriasRoute: typeof CategoriasRouteWithChildren
   OfertaRoute: typeof OfertaRouteWithChildren
+  VendedoresSlugRoute: typeof VendedoresSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -67,11 +128,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfertaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/categorias': {
+      id: '/categorias'
+      path: '/categorias'
+      fullPath: '/categorias'
+      preLoaderRoute: typeof CategoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buscar': {
+      id: '/buscar'
+      path: '/buscar'
+      fullPath: '/buscar'
+      preLoaderRoute: typeof BuscarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendedores/$slug': {
+      id: '/vendedores/$slug'
+      path: '/vendedores/$slug'
+      fullPath: '/vendedores/$slug'
+      preLoaderRoute: typeof VendedoresSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/oferta/$slug': {
@@ -81,8 +163,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfertaSlugRouteImport
       parentRoute: typeof OfertaRoute
     }
+    '/categorias/$slug': {
+      id: '/categorias/$slug'
+      path: '/$slug'
+      fullPath: '/categorias/$slug'
+      preLoaderRoute: typeof CategoriasSlugRouteImport
+      parentRoute: typeof CategoriasRoute
+    }
   }
 }
+
+interface CategoriasRouteChildren {
+  CategoriasSlugRoute: typeof CategoriasSlugRoute
+}
+
+const CategoriasRouteChildren: CategoriasRouteChildren = {
+  CategoriasSlugRoute: CategoriasSlugRoute,
+}
+
+const CategoriasRouteWithChildren = CategoriasRoute._addFileChildren(
+  CategoriasRouteChildren,
+)
 
 interface OfertaRouteChildren {
   OfertaSlugRoute: typeof OfertaSlugRoute
@@ -97,7 +198,10 @@ const OfertaRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuscarRoute: BuscarRoute,
+  CategoriasRoute: CategoriasRouteWithChildren,
   OfertaRoute: OfertaRouteWithChildren,
+  VendedoresSlugRoute: VendedoresSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
