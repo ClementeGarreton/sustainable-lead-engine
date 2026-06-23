@@ -18,6 +18,7 @@ import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as RecuperarRouteImport } from './routes/recuperar'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as PreciosRouteImport } from './routes/precios'
+import { Route as PanelRouteImport } from './routes/panel'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
@@ -32,7 +33,15 @@ import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as BuscarRouteImport } from './routes/buscar'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PanelIndexRouteImport } from './routes/panel.index'
 import { Route as VendedoresSlugRouteImport } from './routes/vendedores.$slug'
+import { Route as PanelPublicarRouteImport } from './routes/panel.publicar'
+import { Route as PanelPerfilRouteImport } from './routes/panel.perfil'
+import { Route as PanelOfertaRouteImport } from './routes/panel.oferta'
+import { Route as PanelNotificacionesRouteImport } from './routes/panel.notificaciones'
+import { Route as PanelLeadsRouteImport } from './routes/panel.leads'
+import { Route as PanelFacturacionRouteImport } from './routes/panel.facturacion'
+import { Route as PanelAjustesRouteImport } from './routes/panel.ajustes'
 import { Route as OfertaSlugRouteImport } from './routes/oferta.$slug'
 import { Route as CategoriasSlugRouteImport } from './routes/categorias.$slug'
 
@@ -79,6 +88,11 @@ const PrivacidadRoute = PrivacidadRouteImport.update({
 const PreciosRoute = PreciosRouteImport.update({
   id: '/precios',
   path: '/precios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PanelRoute = PanelRouteImport.update({
+  id: '/panel',
+  path: '/panel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -151,10 +165,50 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PanelIndexRoute = PanelIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PanelRoute,
+} as any)
 const VendedoresSlugRoute = VendedoresSlugRouteImport.update({
   id: '/vendedores/$slug',
   path: '/vendedores/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PanelPublicarRoute = PanelPublicarRouteImport.update({
+  id: '/publicar',
+  path: '/publicar',
+  getParentRoute: () => PanelRoute,
+} as any)
+const PanelPerfilRoute = PanelPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => PanelRoute,
+} as any)
+const PanelOfertaRoute = PanelOfertaRouteImport.update({
+  id: '/oferta',
+  path: '/oferta',
+  getParentRoute: () => PanelRoute,
+} as any)
+const PanelNotificacionesRoute = PanelNotificacionesRouteImport.update({
+  id: '/notificaciones',
+  path: '/notificaciones',
+  getParentRoute: () => PanelRoute,
+} as any)
+const PanelLeadsRoute = PanelLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => PanelRoute,
+} as any)
+const PanelFacturacionRoute = PanelFacturacionRouteImport.update({
+  id: '/facturacion',
+  path: '/facturacion',
+  getParentRoute: () => PanelRoute,
+} as any)
+const PanelAjustesRoute = PanelAjustesRouteImport.update({
+  id: '/ajustes',
+  path: '/ajustes',
+  getParentRoute: () => PanelRoute,
 } as any)
 const OfertaSlugRoute = OfertaSlugRouteImport.update({
   id: '/$slug',
@@ -182,6 +236,7 @@ export interface FileRoutesByFullPath {
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/panel': typeof PanelRouteWithChildren
   '/precios': typeof PreciosRoute
   '/privacidad': typeof PrivacidadRoute
   '/recuperar': typeof RecuperarRoute
@@ -193,7 +248,15 @@ export interface FileRoutesByFullPath {
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
+  '/panel/ajustes': typeof PanelAjustesRoute
+  '/panel/facturacion': typeof PanelFacturacionRoute
+  '/panel/leads': typeof PanelLeadsRoute
+  '/panel/notificaciones': typeof PanelNotificacionesRoute
+  '/panel/oferta': typeof PanelOfertaRoute
+  '/panel/perfil': typeof PanelPerfilRoute
+  '/panel/publicar': typeof PanelPublicarRoute
   '/vendedores/$slug': typeof VendedoresSlugRoute
+  '/panel/': typeof PanelIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -221,7 +284,15 @@ export interface FileRoutesByTo {
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
+  '/panel/ajustes': typeof PanelAjustesRoute
+  '/panel/facturacion': typeof PanelFacturacionRoute
+  '/panel/leads': typeof PanelLeadsRoute
+  '/panel/notificaciones': typeof PanelNotificacionesRoute
+  '/panel/oferta': typeof PanelOfertaRoute
+  '/panel/perfil': typeof PanelPerfilRoute
+  '/panel/publicar': typeof PanelPublicarRoute
   '/vendedores/$slug': typeof VendedoresSlugRoute
+  '/panel': typeof PanelIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -239,6 +310,7 @@ export interface FileRoutesById {
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
   '/onboarding': typeof OnboardingRoute
+  '/panel': typeof PanelRouteWithChildren
   '/precios': typeof PreciosRoute
   '/privacidad': typeof PrivacidadRoute
   '/recuperar': typeof RecuperarRoute
@@ -250,7 +322,15 @@ export interface FileRoutesById {
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
+  '/panel/ajustes': typeof PanelAjustesRoute
+  '/panel/facturacion': typeof PanelFacturacionRoute
+  '/panel/leads': typeof PanelLeadsRoute
+  '/panel/notificaciones': typeof PanelNotificacionesRoute
+  '/panel/oferta': typeof PanelOfertaRoute
+  '/panel/perfil': typeof PanelPerfilRoute
+  '/panel/publicar': typeof PanelPublicarRoute
   '/vendedores/$slug': typeof VendedoresSlugRoute
+  '/panel/': typeof PanelIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -269,6 +349,7 @@ export interface FileRouteTypes {
     | '/mantenimiento'
     | '/oferta'
     | '/onboarding'
+    | '/panel'
     | '/precios'
     | '/privacidad'
     | '/recuperar'
@@ -280,7 +361,15 @@ export interface FileRouteTypes {
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
+    | '/panel/ajustes'
+    | '/panel/facturacion'
+    | '/panel/leads'
+    | '/panel/notificaciones'
+    | '/panel/oferta'
+    | '/panel/perfil'
+    | '/panel/publicar'
     | '/vendedores/$slug'
+    | '/panel/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -308,7 +397,15 @@ export interface FileRouteTypes {
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
+    | '/panel/ajustes'
+    | '/panel/facturacion'
+    | '/panel/leads'
+    | '/panel/notificaciones'
+    | '/panel/oferta'
+    | '/panel/perfil'
+    | '/panel/publicar'
     | '/vendedores/$slug'
+    | '/panel'
   id:
     | '__root__'
     | '/'
@@ -325,6 +422,7 @@ export interface FileRouteTypes {
     | '/mantenimiento'
     | '/oferta'
     | '/onboarding'
+    | '/panel'
     | '/precios'
     | '/privacidad'
     | '/recuperar'
@@ -336,7 +434,15 @@ export interface FileRouteTypes {
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
+    | '/panel/ajustes'
+    | '/panel/facturacion'
+    | '/panel/leads'
+    | '/panel/notificaciones'
+    | '/panel/oferta'
+    | '/panel/perfil'
+    | '/panel/publicar'
     | '/vendedores/$slug'
+    | '/panel/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -354,6 +460,7 @@ export interface RootRouteChildren {
   MantenimientoRoute: typeof MantenimientoRoute
   OfertaRoute: typeof OfertaRouteWithChildren
   OnboardingRoute: typeof OnboardingRoute
+  PanelRoute: typeof PanelRouteWithChildren
   PreciosRoute: typeof PreciosRoute
   PrivacidadRoute: typeof PrivacidadRoute
   RecuperarRoute: typeof RecuperarRoute
@@ -429,6 +536,13 @@ declare module '@tanstack/react-router' {
       path: '/precios'
       fullPath: '/precios'
       preLoaderRoute: typeof PreciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/panel': {
+      id: '/panel'
+      path: '/panel'
+      fullPath: '/panel'
+      preLoaderRoute: typeof PanelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -529,12 +643,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/panel/': {
+      id: '/panel/'
+      path: '/'
+      fullPath: '/panel/'
+      preLoaderRoute: typeof PanelIndexRouteImport
+      parentRoute: typeof PanelRoute
+    }
     '/vendedores/$slug': {
       id: '/vendedores/$slug'
       path: '/vendedores/$slug'
       fullPath: '/vendedores/$slug'
       preLoaderRoute: typeof VendedoresSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/panel/publicar': {
+      id: '/panel/publicar'
+      path: '/publicar'
+      fullPath: '/panel/publicar'
+      preLoaderRoute: typeof PanelPublicarRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/perfil': {
+      id: '/panel/perfil'
+      path: '/perfil'
+      fullPath: '/panel/perfil'
+      preLoaderRoute: typeof PanelPerfilRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/oferta': {
+      id: '/panel/oferta'
+      path: '/oferta'
+      fullPath: '/panel/oferta'
+      preLoaderRoute: typeof PanelOfertaRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/notificaciones': {
+      id: '/panel/notificaciones'
+      path: '/notificaciones'
+      fullPath: '/panel/notificaciones'
+      preLoaderRoute: typeof PanelNotificacionesRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/leads': {
+      id: '/panel/leads'
+      path: '/leads'
+      fullPath: '/panel/leads'
+      preLoaderRoute: typeof PanelLeadsRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/facturacion': {
+      id: '/panel/facturacion'
+      path: '/facturacion'
+      fullPath: '/panel/facturacion'
+      preLoaderRoute: typeof PanelFacturacionRouteImport
+      parentRoute: typeof PanelRoute
+    }
+    '/panel/ajustes': {
+      id: '/panel/ajustes'
+      path: '/ajustes'
+      fullPath: '/panel/ajustes'
+      preLoaderRoute: typeof PanelAjustesRouteImport
+      parentRoute: typeof PanelRoute
     }
     '/oferta/$slug': {
       id: '/oferta/$slug'
@@ -576,6 +746,30 @@ const OfertaRouteChildren: OfertaRouteChildren = {
 const OfertaRouteWithChildren =
   OfertaRoute._addFileChildren(OfertaRouteChildren)
 
+interface PanelRouteChildren {
+  PanelAjustesRoute: typeof PanelAjustesRoute
+  PanelFacturacionRoute: typeof PanelFacturacionRoute
+  PanelLeadsRoute: typeof PanelLeadsRoute
+  PanelNotificacionesRoute: typeof PanelNotificacionesRoute
+  PanelOfertaRoute: typeof PanelOfertaRoute
+  PanelPerfilRoute: typeof PanelPerfilRoute
+  PanelPublicarRoute: typeof PanelPublicarRoute
+  PanelIndexRoute: typeof PanelIndexRoute
+}
+
+const PanelRouteChildren: PanelRouteChildren = {
+  PanelAjustesRoute: PanelAjustesRoute,
+  PanelFacturacionRoute: PanelFacturacionRoute,
+  PanelLeadsRoute: PanelLeadsRoute,
+  PanelNotificacionesRoute: PanelNotificacionesRoute,
+  PanelOfertaRoute: PanelOfertaRoute,
+  PanelPerfilRoute: PanelPerfilRoute,
+  PanelPublicarRoute: PanelPublicarRoute,
+  PanelIndexRoute: PanelIndexRoute,
+}
+
+const PanelRouteWithChildren = PanelRoute._addFileChildren(PanelRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
@@ -591,6 +785,7 @@ const rootRouteChildren: RootRouteChildren = {
   MantenimientoRoute: MantenimientoRoute,
   OfertaRoute: OfertaRouteWithChildren,
   OnboardingRoute: OnboardingRoute,
+  PanelRoute: PanelRouteWithChildren,
   PreciosRoute: PreciosRoute,
   PrivacidadRoute: PrivacidadRoute,
   RecuperarRoute: RecuperarRoute,
