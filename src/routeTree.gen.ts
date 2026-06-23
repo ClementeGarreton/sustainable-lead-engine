@@ -10,11 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerificarCorreoRouteImport } from './routes/verificar-correo'
+import { Route as SoporteRouteImport } from './routes/soporte'
+import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as RestablecerRouteImport } from './routes/restablecer'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as RecuperarRouteImport } from './routes/recuperar'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as IngresarRouteImport } from './routes/ingresar'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as BuscarRouteImport } from './routes/buscar'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,6 +29,16 @@ import { Route as CategoriasSlugRouteImport } from './routes/categorias.$slug'
 const VerificarCorreoRoute = VerificarCorreoRouteImport.update({
   id: '/verificar-correo',
   path: '/verificar-correo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SoporteRoute = SoporteRouteImport.update({
+  id: '/soporte',
+  path: '/soporte',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreNosotrosRoute = SobreNosotrosRouteImport.update({
+  id: '/sobre-nosotros',
+  path: '/sobre-nosotros',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RestablecerRoute = RestablecerRouteImport.update({
@@ -50,6 +64,16 @@ const OfertaRoute = OfertaRouteImport.update({
 const IngresarRoute = IngresarRouteImport.update({
   id: '/ingresar',
   path: '/ingresar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriasRoute = CategoriasRouteImport.update({
@@ -87,11 +111,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/contacto': typeof ContactoRoute
+  '/faq': typeof FaqRoute
   '/ingresar': typeof IngresarRoute
   '/oferta': typeof OfertaRouteWithChildren
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
+  '/sobre-nosotros': typeof SobreNosotrosRoute
+  '/soporte': typeof SoporteRoute
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
@@ -101,11 +129,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/contacto': typeof ContactoRoute
+  '/faq': typeof FaqRoute
   '/ingresar': typeof IngresarRoute
   '/oferta': typeof OfertaRouteWithChildren
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
+  '/sobre-nosotros': typeof SobreNosotrosRoute
+  '/soporte': typeof SoporteRoute
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
@@ -116,11 +148,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/contacto': typeof ContactoRoute
+  '/faq': typeof FaqRoute
   '/ingresar': typeof IngresarRoute
   '/oferta': typeof OfertaRouteWithChildren
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
+  '/sobre-nosotros': typeof SobreNosotrosRoute
+  '/soporte': typeof SoporteRoute
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
@@ -132,11 +168,15 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/contacto'
+    | '/faq'
     | '/ingresar'
     | '/oferta'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
+    | '/sobre-nosotros'
+    | '/soporte'
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
@@ -146,11 +186,15 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/contacto'
+    | '/faq'
     | '/ingresar'
     | '/oferta'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
+    | '/sobre-nosotros'
+    | '/soporte'
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
@@ -160,11 +204,15 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/contacto'
+    | '/faq'
     | '/ingresar'
     | '/oferta'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
+    | '/sobre-nosotros'
+    | '/soporte'
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
@@ -175,11 +223,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuscarRoute: typeof BuscarRoute
   CategoriasRoute: typeof CategoriasRouteWithChildren
+  ContactoRoute: typeof ContactoRoute
+  FaqRoute: typeof FaqRoute
   IngresarRoute: typeof IngresarRoute
   OfertaRoute: typeof OfertaRouteWithChildren
   RecuperarRoute: typeof RecuperarRoute
   RegistroRoute: typeof RegistroRoute
   RestablecerRoute: typeof RestablecerRoute
+  SobreNosotrosRoute: typeof SobreNosotrosRoute
+  SoporteRoute: typeof SoporteRoute
   VerificarCorreoRoute: typeof VerificarCorreoRoute
   VendedoresSlugRoute: typeof VendedoresSlugRoute
 }
@@ -191,6 +243,20 @@ declare module '@tanstack/react-router' {
       path: '/verificar-correo'
       fullPath: '/verificar-correo'
       preLoaderRoute: typeof VerificarCorreoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/soporte': {
+      id: '/soporte'
+      path: '/soporte'
+      fullPath: '/soporte'
+      preLoaderRoute: typeof SoporteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre-nosotros': {
+      id: '/sobre-nosotros'
+      path: '/sobre-nosotros'
+      fullPath: '/sobre-nosotros'
+      preLoaderRoute: typeof SobreNosotrosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/restablecer': {
@@ -226,6 +292,20 @@ declare module '@tanstack/react-router' {
       path: '/ingresar'
       fullPath: '/ingresar'
       preLoaderRoute: typeof IngresarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categorias': {
@@ -300,11 +380,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuscarRoute: BuscarRoute,
   CategoriasRoute: CategoriasRouteWithChildren,
+  ContactoRoute: ContactoRoute,
+  FaqRoute: FaqRoute,
   IngresarRoute: IngresarRoute,
   OfertaRoute: OfertaRouteWithChildren,
   RecuperarRoute: RecuperarRoute,
   RegistroRoute: RegistroRoute,
   RestablecerRoute: RestablecerRoute,
+  SobreNosotrosRoute: SobreNosotrosRoute,
+  SoporteRoute: SoporteRoute,
   VerificarCorreoRoute: VerificarCorreoRoute,
   VendedoresSlugRoute: VendedoresSlugRoute,
 }
