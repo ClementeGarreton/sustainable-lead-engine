@@ -9,7 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerificarCorreoRouteImport } from './routes/verificar-correo'
+import { Route as RestablecerRouteImport } from './routes/restablecer'
+import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as RecuperarRouteImport } from './routes/recuperar'
 import { Route as OfertaRouteImport } from './routes/oferta'
+import { Route as IngresarRouteImport } from './routes/ingresar'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as BuscarRouteImport } from './routes/buscar'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,9 +22,34 @@ import { Route as VendedoresSlugRouteImport } from './routes/vendedores.$slug'
 import { Route as OfertaSlugRouteImport } from './routes/oferta.$slug'
 import { Route as CategoriasSlugRouteImport } from './routes/categorias.$slug'
 
+const VerificarCorreoRoute = VerificarCorreoRouteImport.update({
+  id: '/verificar-correo',
+  path: '/verificar-correo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RestablecerRoute = RestablecerRouteImport.update({
+  id: '/restablecer',
+  path: '/restablecer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecuperarRoute = RecuperarRouteImport.update({
+  id: '/recuperar',
+  path: '/recuperar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OfertaRoute = OfertaRouteImport.update({
   id: '/oferta',
   path: '/oferta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IngresarRoute = IngresarRouteImport.update({
+  id: '/ingresar',
+  path: '/ingresar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriasRoute = CategoriasRouteImport.update({
@@ -57,7 +87,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/ingresar': typeof IngresarRoute
   '/oferta': typeof OfertaRouteWithChildren
+  '/recuperar': typeof RecuperarRoute
+  '/registro': typeof RegistroRoute
+  '/restablecer': typeof RestablecerRoute
+  '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
   '/vendedores/$slug': typeof VendedoresSlugRoute
@@ -66,7 +101,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/ingresar': typeof IngresarRoute
   '/oferta': typeof OfertaRouteWithChildren
+  '/recuperar': typeof RecuperarRoute
+  '/registro': typeof RegistroRoute
+  '/restablecer': typeof RestablecerRoute
+  '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
   '/vendedores/$slug': typeof VendedoresSlugRoute
@@ -76,7 +116,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/ingresar': typeof IngresarRoute
   '/oferta': typeof OfertaRouteWithChildren
+  '/recuperar': typeof RecuperarRoute
+  '/registro': typeof RegistroRoute
+  '/restablecer': typeof RestablecerRoute
+  '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
   '/vendedores/$slug': typeof VendedoresSlugRoute
@@ -87,7 +132,12 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/ingresar'
     | '/oferta'
+    | '/recuperar'
+    | '/registro'
+    | '/restablecer'
+    | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
     | '/vendedores/$slug'
@@ -96,7 +146,12 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/ingresar'
     | '/oferta'
+    | '/recuperar'
+    | '/registro'
+    | '/restablecer'
+    | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
     | '/vendedores/$slug'
@@ -105,7 +160,12 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/ingresar'
     | '/oferta'
+    | '/recuperar'
+    | '/registro'
+    | '/restablecer'
+    | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
     | '/vendedores/$slug'
@@ -115,17 +175,57 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuscarRoute: typeof BuscarRoute
   CategoriasRoute: typeof CategoriasRouteWithChildren
+  IngresarRoute: typeof IngresarRoute
   OfertaRoute: typeof OfertaRouteWithChildren
+  RecuperarRoute: typeof RecuperarRoute
+  RegistroRoute: typeof RegistroRoute
+  RestablecerRoute: typeof RestablecerRoute
+  VerificarCorreoRoute: typeof VerificarCorreoRoute
   VendedoresSlugRoute: typeof VendedoresSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verificar-correo': {
+      id: '/verificar-correo'
+      path: '/verificar-correo'
+      fullPath: '/verificar-correo'
+      preLoaderRoute: typeof VerificarCorreoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/restablecer': {
+      id: '/restablecer'
+      path: '/restablecer'
+      fullPath: '/restablecer'
+      preLoaderRoute: typeof RestablecerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recuperar': {
+      id: '/recuperar'
+      path: '/recuperar'
+      fullPath: '/recuperar'
+      preLoaderRoute: typeof RecuperarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/oferta': {
       id: '/oferta'
       path: '/oferta'
       fullPath: '/oferta'
       preLoaderRoute: typeof OfertaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ingresar': {
+      id: '/ingresar'
+      path: '/ingresar'
+      fullPath: '/ingresar'
+      preLoaderRoute: typeof IngresarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categorias': {
@@ -200,7 +300,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuscarRoute: BuscarRoute,
   CategoriasRoute: CategoriasRouteWithChildren,
+  IngresarRoute: IngresarRoute,
   OfertaRoute: OfertaRouteWithChildren,
+  RecuperarRoute: RecuperarRoute,
+  RegistroRoute: RegistroRoute,
+  RestablecerRoute: RestablecerRoute,
+  VerificarCorreoRoute: VerificarCorreoRoute,
   VendedoresSlugRoute: VendedoresSlugRoute,
 }
 export const routeTree = rootRouteImport
