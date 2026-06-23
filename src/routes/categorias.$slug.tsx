@@ -21,7 +21,8 @@ export const Route = createFileRoute("/categorias/$slug")({
 });
 
 function Category() {
-  const { slug } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { slug: import("@/lib/mock-data").Category };
+  const slug = data.slug;
   const list = offersByCategory(slug);
   return (
     <SiteShell>

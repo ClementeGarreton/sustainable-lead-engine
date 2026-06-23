@@ -22,7 +22,11 @@ export const Route = createFileRoute("/vendedores/$slug")({
 });
 
 function SellerPage() {
-  const { seller, offers } = Route.useLoaderData();
+  const data = Route.useLoaderData() as {
+    seller: import("@/lib/mock-data").Seller;
+    offers: import("@/lib/mock-data").Offer[];
+  };
+  const { seller, offers } = data;
   return (
     <SiteShell>
       <section className="border-b border-border bg-card/30">
