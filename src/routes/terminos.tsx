@@ -1,0 +1,22 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { SiteShell } from "@/components/site/SiteShell";
+
+export const Route = createFileRoute("/terminos")({
+  head: () => ({ meta: [{ title: "Términos y condiciones — Mi Auto Sustentable" }, { name: "description", content: "Términos de uso del portal." }]}),
+  component: () => (
+    <SiteShell>
+      <article className="container mx-auto max-w-3xl px-4 py-16 prose-headings:font-display">
+        <h1 className="font-display text-4xl font-bold">Términos y condiciones</h1>
+        <p className="mt-4 text-sm text-muted-foreground">Última actualización: junio 2026</p>
+        <div className="mt-8 space-y-6 text-muted-foreground">
+          <section><h2 className="font-display text-xl font-semibold text-foreground">1. Naturaleza del servicio</h2><p>Mi Auto Sustentable es un portal de leads que conecta unidades compradoras con unidades vendedoras del rubro de electromovilidad en Chile. No participamos en la transacción comercial entre las partes.</p></section>
+          <section><h2 className="font-display text-xl font-semibold text-foreground">2. Captura de contacto</h2><p>Para desbloquear el contenido de una oferta, la unidad usuaria entrega su nombre, correo y teléfono. Este registro se entrega al vendedor de la oferta desbloqueada.</p></section>
+          <section><h2 className="font-display text-xl font-semibold text-foreground">3. Distribución del lead</h2><p>El lead capturado podrá ser contactado por correo, SMS, WhatsApp o redes sociales por vendedores compatibles con la oferta. No se ofrece exclusividad por defecto.</p></section>
+          <section><h2 className="font-display text-xl font-semibold text-foreground">4. Veracidad de la oferta</h2><p>El vendedor es responsable de la veracidad y vigencia del contenido publicado. Moderamos la oferta y podemos suspender publicaciones engañosas.</p></section>
+          <section><h2 className="font-display text-xl font-semibold text-foreground">5. Pago de planes</h2><p>Los planes publicitarios se contratan en pesos chilenos, con renovación mensual automática.</p></section>
+          <section><h2 className="font-display text-xl font-semibold text-foreground">6. Modificaciones</h2><p>Estos términos pueden actualizarse. Notificamos cambios materiales por correo.</p></section>
+        </div>
+      </article>
+    </SiteShell>
+  ),
+});
