@@ -9,38 +9,64 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OfertaSlugRouteImport } from './routes/oferta.$slug'
 
+const OfertaRoute = OfertaRouteImport.update({
+  id: '/oferta',
+  path: '/oferta',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OfertaSlugRoute = OfertaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => OfertaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/oferta': typeof OfertaRouteWithChildren
+  '/oferta/$slug': typeof OfertaSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/oferta': typeof OfertaRouteWithChildren
+  '/oferta/$slug': typeof OfertaSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/oferta': typeof OfertaRouteWithChildren
+  '/oferta/$slug': typeof OfertaSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/oferta' | '/oferta/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/oferta' | '/oferta/$slug'
+  id: '__root__' | '/' | '/oferta' | '/oferta/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  OfertaRoute: typeof OfertaRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/oferta': {
+      id: '/oferta'
+      path: '/oferta'
+      fullPath: '/oferta'
+      preLoaderRoute: typeof OfertaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +74,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/oferta/$slug': {
+      id: '/oferta/$slug'
+      path: '/$slug'
+      fullPath: '/oferta/$slug'
+      preLoaderRoute: typeof OfertaSlugRouteImport
+      parentRoute: typeof OfertaRoute
+    }
   }
 }
 
+interface OfertaRouteChildren {
+  OfertaSlugRoute: typeof OfertaSlugRoute
+}
+
+const OfertaRouteChildren: OfertaRouteChildren = {
+  OfertaSlugRoute: OfertaSlugRoute,
+}
+
+const OfertaRouteWithChildren =
+  OfertaRoute._addFileChildren(OfertaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  OfertaRoute: OfertaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
