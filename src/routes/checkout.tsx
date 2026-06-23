@@ -9,10 +9,10 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { PLANS, formatCLP } from "@/lib/mock-data";
 
-const search = z.object({ plan: z.string().optional() });
+const searchSchema = z.object({ plan: z.string().optional() });
 
 export const Route = createFileRoute("/checkout")({
-  validateSearch: search,
+  validateSearch: (s: Record<string, unknown>) => searchSchema.parse(s),
   head: () => ({ meta: [{ title: "Contratar plan — Mi Auto Sustentable" }, { name: "description", content: "Activa tu plan publicitario." }]}),
   component: Checkout,
 });
