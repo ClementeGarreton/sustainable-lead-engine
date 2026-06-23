@@ -13,6 +13,7 @@ import { Route as VerificarCorreoRouteImport } from './routes/verificar-correo'
 import { Route as TerminosRouteImport } from './routes/terminos'
 import { Route as SoporteRouteImport } from './routes/soporte'
 import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RestablecerRouteImport } from './routes/restablecer'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as RecuperarRouteImport } from './routes/recuperar'
@@ -63,6 +64,11 @@ const SoporteRoute = SoporteRouteImport.update({
 const SobreNosotrosRoute = SobreNosotrosRouteImport.update({
   id: '/sobre-nosotros',
   path: '/sobre-nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RestablecerRoute = RestablecerRouteImport.update({
@@ -242,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
   '/terminos': typeof TerminosRoute
@@ -278,6 +285,7 @@ export interface FileRoutesByTo {
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
   '/terminos': typeof TerminosRoute
@@ -316,6 +324,7 @@ export interface FileRoutesById {
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
   '/terminos': typeof TerminosRoute
@@ -355,6 +364,7 @@ export interface FileRouteTypes {
     | '/recuperar'
     | '/registro'
     | '/restablecer'
+    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soporte'
     | '/terminos'
@@ -391,6 +401,7 @@ export interface FileRouteTypes {
     | '/recuperar'
     | '/registro'
     | '/restablecer'
+    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soporte'
     | '/terminos'
@@ -428,6 +439,7 @@ export interface FileRouteTypes {
     | '/recuperar'
     | '/registro'
     | '/restablecer'
+    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soporte'
     | '/terminos'
@@ -466,6 +478,7 @@ export interface RootRouteChildren {
   RecuperarRoute: typeof RecuperarRoute
   RegistroRoute: typeof RegistroRoute
   RestablecerRoute: typeof RestablecerRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreNosotrosRoute: typeof SobreNosotrosRoute
   SoporteRoute: typeof SoporteRoute
   TerminosRoute: typeof TerminosRoute
@@ -501,6 +514,13 @@ declare module '@tanstack/react-router' {
       path: '/sobre-nosotros'
       fullPath: '/sobre-nosotros'
       preLoaderRoute: typeof SobreNosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/restablecer': {
@@ -791,6 +811,7 @@ const rootRouteChildren: RootRouteChildren = {
   RecuperarRoute: RecuperarRoute,
   RegistroRoute: RegistroRoute,
   RestablecerRoute: RestablecerRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreNosotrosRoute: SobreNosotrosRoute,
   SoporteRoute: SoporteRoute,
   TerminosRoute: TerminosRoute,
