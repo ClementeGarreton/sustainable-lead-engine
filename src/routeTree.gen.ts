@@ -10,11 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerificarCorreoRouteImport } from './routes/verificar-correo'
+import { Route as TerminosRouteImport } from './routes/terminos'
 import { Route as SoporteRouteImport } from './routes/soporte'
 import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as RestablecerRouteImport } from './routes/restablecer'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as RecuperarRouteImport } from './routes/recuperar'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as PreciosRouteImport } from './routes/precios'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OfertaRouteImport } from './routes/oferta'
@@ -22,10 +24,13 @@ import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
 import { Route as IngresarRouteImport } from './routes/ingresar'
 import { Route as GraciasRouteImport } from './routes/gracias'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as CompradorRouteImport } from './routes/comprador'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as BuscarRouteImport } from './routes/buscar'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendedoresSlugRouteImport } from './routes/vendedores.$slug'
 import { Route as OfertaSlugRouteImport } from './routes/oferta.$slug'
@@ -34,6 +39,11 @@ import { Route as CategoriasSlugRouteImport } from './routes/categorias.$slug'
 const VerificarCorreoRoute = VerificarCorreoRouteImport.update({
   id: '/verificar-correo',
   path: '/verificar-correo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminosRoute = TerminosRouteImport.update({
+  id: '/terminos',
+  path: '/terminos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SoporteRoute = SoporteRouteImport.update({
@@ -59,6 +69,11 @@ const RegistroRoute = RegistroRouteImport.update({
 const RecuperarRoute = RecuperarRouteImport.update({
   id: '/recuperar',
   path: '/recuperar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PreciosRoute = PreciosRouteImport.update({
@@ -96,9 +111,19 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompradorRoute = CompradorRouteImport.update({
+  id: '/comprador',
+  path: '/comprador',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -114,6 +139,11 @@ const CategoriasRoute = CategoriasRouteImport.update({
 const BuscarRoute = BuscarRouteImport.update({
   id: '/buscar',
   path: '/buscar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -139,10 +169,13 @@ const CategoriasSlugRoute = CategoriasSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
   '/checkout': typeof CheckoutRoute
+  '/comprador': typeof CompradorRoute
   '/contacto': typeof ContactoRoute
+  '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
   '/ingresar': typeof IngresarRoute
@@ -150,11 +183,13 @@ export interface FileRoutesByFullPath {
   '/oferta': typeof OfertaRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/precios': typeof PreciosRoute
+  '/privacidad': typeof PrivacidadRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
+  '/terminos': typeof TerminosRoute
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
@@ -162,10 +197,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
   '/checkout': typeof CheckoutRoute
+  '/comprador': typeof CompradorRoute
   '/contacto': typeof ContactoRoute
+  '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
   '/ingresar': typeof IngresarRoute
@@ -173,11 +211,13 @@ export interface FileRoutesByTo {
   '/oferta': typeof OfertaRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/precios': typeof PreciosRoute
+  '/privacidad': typeof PrivacidadRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
+  '/terminos': typeof TerminosRoute
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
@@ -186,10 +226,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
   '/checkout': typeof CheckoutRoute
+  '/comprador': typeof CompradorRoute
   '/contacto': typeof ContactoRoute
+  '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
   '/ingresar': typeof IngresarRoute
@@ -197,11 +240,13 @@ export interface FileRoutesById {
   '/oferta': typeof OfertaRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/precios': typeof PreciosRoute
+  '/privacidad': typeof PrivacidadRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
+  '/terminos': typeof TerminosRoute
   '/verificar-correo': typeof VerificarCorreoRoute
   '/categorias/$slug': typeof CategoriasSlugRoute
   '/oferta/$slug': typeof OfertaSlugRoute
@@ -211,10 +256,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/buscar'
     | '/categorias'
     | '/checkout'
+    | '/comprador'
     | '/contacto'
+    | '/cookies'
     | '/faq'
     | '/gracias'
     | '/ingresar'
@@ -222,11 +270,13 @@ export interface FileRouteTypes {
     | '/oferta'
     | '/onboarding'
     | '/precios'
+    | '/privacidad'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
     | '/sobre-nosotros'
     | '/soporte'
+    | '/terminos'
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
@@ -234,10 +284,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/buscar'
     | '/categorias'
     | '/checkout'
+    | '/comprador'
     | '/contacto'
+    | '/cookies'
     | '/faq'
     | '/gracias'
     | '/ingresar'
@@ -245,11 +298,13 @@ export interface FileRouteTypes {
     | '/oferta'
     | '/onboarding'
     | '/precios'
+    | '/privacidad'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
     | '/sobre-nosotros'
     | '/soporte'
+    | '/terminos'
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
@@ -257,10 +312,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/buscar'
     | '/categorias'
     | '/checkout'
+    | '/comprador'
     | '/contacto'
+    | '/cookies'
     | '/faq'
     | '/gracias'
     | '/ingresar'
@@ -268,11 +326,13 @@ export interface FileRouteTypes {
     | '/oferta'
     | '/onboarding'
     | '/precios'
+    | '/privacidad'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
     | '/sobre-nosotros'
     | '/soporte'
+    | '/terminos'
     | '/verificar-correo'
     | '/categorias/$slug'
     | '/oferta/$slug'
@@ -281,10 +341,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   BuscarRoute: typeof BuscarRoute
   CategoriasRoute: typeof CategoriasRouteWithChildren
   CheckoutRoute: typeof CheckoutRoute
+  CompradorRoute: typeof CompradorRoute
   ContactoRoute: typeof ContactoRoute
+  CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
   GraciasRoute: typeof GraciasRoute
   IngresarRoute: typeof IngresarRoute
@@ -292,11 +355,13 @@ export interface RootRouteChildren {
   OfertaRoute: typeof OfertaRouteWithChildren
   OnboardingRoute: typeof OnboardingRoute
   PreciosRoute: typeof PreciosRoute
+  PrivacidadRoute: typeof PrivacidadRoute
   RecuperarRoute: typeof RecuperarRoute
   RegistroRoute: typeof RegistroRoute
   RestablecerRoute: typeof RestablecerRoute
   SobreNosotrosRoute: typeof SobreNosotrosRoute
   SoporteRoute: typeof SoporteRoute
+  TerminosRoute: typeof TerminosRoute
   VerificarCorreoRoute: typeof VerificarCorreoRoute
   VendedoresSlugRoute: typeof VendedoresSlugRoute
 }
@@ -308,6 +373,13 @@ declare module '@tanstack/react-router' {
       path: '/verificar-correo'
       fullPath: '/verificar-correo'
       preLoaderRoute: typeof VerificarCorreoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminos': {
+      id: '/terminos'
+      path: '/terminos'
+      fullPath: '/terminos'
+      preLoaderRoute: typeof TerminosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/soporte': {
@@ -343,6 +415,13 @@ declare module '@tanstack/react-router' {
       path: '/recuperar'
       fullPath: '/recuperar'
       preLoaderRoute: typeof RecuperarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/precios': {
@@ -394,11 +473,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contacto': {
       id: '/contacto'
       path: '/contacto'
       fullPath: '/contacto'
       preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comprador': {
+      id: '/comprador'
+      path: '/comprador'
+      fullPath: '/comprador'
+      preLoaderRoute: typeof CompradorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -420,6 +513,13 @@ declare module '@tanstack/react-router' {
       path: '/buscar'
       fullPath: '/buscar'
       preLoaderRoute: typeof BuscarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -478,10 +578,13 @@ const OfertaRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   BuscarRoute: BuscarRoute,
   CategoriasRoute: CategoriasRouteWithChildren,
   CheckoutRoute: CheckoutRoute,
+  CompradorRoute: CompradorRoute,
   ContactoRoute: ContactoRoute,
+  CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
   GraciasRoute: GraciasRoute,
   IngresarRoute: IngresarRoute,
@@ -489,11 +592,13 @@ const rootRouteChildren: RootRouteChildren = {
   OfertaRoute: OfertaRouteWithChildren,
   OnboardingRoute: OnboardingRoute,
   PreciosRoute: PreciosRoute,
+  PrivacidadRoute: PrivacidadRoute,
   RecuperarRoute: RecuperarRoute,
   RegistroRoute: RegistroRoute,
   RestablecerRoute: RestablecerRoute,
   SobreNosotrosRoute: SobreNosotrosRoute,
   SoporteRoute: SoporteRoute,
+  TerminosRoute: TerminosRoute,
   VerificarCorreoRoute: VerificarCorreoRoute,
   VendedoresSlugRoute: VendedoresSlugRoute,
 }
