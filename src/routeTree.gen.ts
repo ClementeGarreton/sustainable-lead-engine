@@ -15,10 +15,15 @@ import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
 import { Route as RestablecerRouteImport } from './routes/restablecer'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as RecuperarRouteImport } from './routes/recuperar'
+import { Route as PreciosRouteImport } from './routes/precios'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OfertaRouteImport } from './routes/oferta'
+import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
 import { Route as IngresarRouteImport } from './routes/ingresar'
+import { Route as GraciasRouteImport } from './routes/gracias'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as BuscarRouteImport } from './routes/buscar'
 import { Route as IndexRouteImport } from './routes/index'
@@ -56,14 +61,34 @@ const RecuperarRoute = RecuperarRouteImport.update({
   path: '/recuperar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PreciosRoute = PreciosRouteImport.update({
+  id: '/precios',
+  path: '/precios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OfertaRoute = OfertaRouteImport.update({
   id: '/oferta',
   path: '/oferta',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MantenimientoRoute = MantenimientoRouteImport.update({
+  id: '/mantenimiento',
+  path: '/mantenimiento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IngresarRoute = IngresarRouteImport.update({
   id: '/ingresar',
   path: '/ingresar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GraciasRoute = GraciasRouteImport.update({
+  id: '/gracias',
+  path: '/gracias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -74,6 +99,11 @@ const FaqRoute = FaqRouteImport.update({
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriasRoute = CategoriasRouteImport.update({
@@ -111,10 +141,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/faq': typeof FaqRoute
+  '/gracias': typeof GraciasRoute
   '/ingresar': typeof IngresarRoute
+  '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
+  '/precios': typeof PreciosRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
@@ -129,10 +164,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/faq': typeof FaqRoute
+  '/gracias': typeof GraciasRoute
   '/ingresar': typeof IngresarRoute
+  '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
+  '/precios': typeof PreciosRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
@@ -148,10 +188,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/buscar': typeof BuscarRoute
   '/categorias': typeof CategoriasRouteWithChildren
+  '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/faq': typeof FaqRoute
+  '/gracias': typeof GraciasRoute
   '/ingresar': typeof IngresarRoute
+  '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
+  '/precios': typeof PreciosRoute
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
@@ -168,10 +213,15 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/checkout'
     | '/contacto'
     | '/faq'
+    | '/gracias'
     | '/ingresar'
+    | '/mantenimiento'
     | '/oferta'
+    | '/onboarding'
+    | '/precios'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
@@ -186,10 +236,15 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/checkout'
     | '/contacto'
     | '/faq'
+    | '/gracias'
     | '/ingresar'
+    | '/mantenimiento'
     | '/oferta'
+    | '/onboarding'
+    | '/precios'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
@@ -204,10 +259,15 @@ export interface FileRouteTypes {
     | '/'
     | '/buscar'
     | '/categorias'
+    | '/checkout'
     | '/contacto'
     | '/faq'
+    | '/gracias'
     | '/ingresar'
+    | '/mantenimiento'
     | '/oferta'
+    | '/onboarding'
+    | '/precios'
     | '/recuperar'
     | '/registro'
     | '/restablecer'
@@ -223,10 +283,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BuscarRoute: typeof BuscarRoute
   CategoriasRoute: typeof CategoriasRouteWithChildren
+  CheckoutRoute: typeof CheckoutRoute
   ContactoRoute: typeof ContactoRoute
   FaqRoute: typeof FaqRoute
+  GraciasRoute: typeof GraciasRoute
   IngresarRoute: typeof IngresarRoute
+  MantenimientoRoute: typeof MantenimientoRoute
   OfertaRoute: typeof OfertaRouteWithChildren
+  OnboardingRoute: typeof OnboardingRoute
+  PreciosRoute: typeof PreciosRoute
   RecuperarRoute: typeof RecuperarRoute
   RegistroRoute: typeof RegistroRoute
   RestablecerRoute: typeof RestablecerRoute
@@ -280,6 +345,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecuperarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/precios': {
+      id: '/precios'
+      path: '/precios'
+      fullPath: '/precios'
+      preLoaderRoute: typeof PreciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/oferta': {
       id: '/oferta'
       path: '/oferta'
@@ -287,11 +366,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfertaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mantenimiento': {
+      id: '/mantenimiento'
+      path: '/mantenimiento'
+      fullPath: '/mantenimiento'
+      preLoaderRoute: typeof MantenimientoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ingresar': {
       id: '/ingresar'
       path: '/ingresar'
       fullPath: '/ingresar'
       preLoaderRoute: typeof IngresarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gracias': {
+      id: '/gracias'
+      path: '/gracias'
+      fullPath: '/gracias'
+      preLoaderRoute: typeof GraciasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -306,6 +399,13 @@ declare module '@tanstack/react-router' {
       path: '/contacto'
       fullPath: '/contacto'
       preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categorias': {
@@ -380,10 +480,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BuscarRoute: BuscarRoute,
   CategoriasRoute: CategoriasRouteWithChildren,
+  CheckoutRoute: CheckoutRoute,
   ContactoRoute: ContactoRoute,
   FaqRoute: FaqRoute,
+  GraciasRoute: GraciasRoute,
   IngresarRoute: IngresarRoute,
+  MantenimientoRoute: MantenimientoRoute,
   OfertaRoute: OfertaRouteWithChildren,
+  OnboardingRoute: OnboardingRoute,
+  PreciosRoute: PreciosRoute,
   RecuperarRoute: RecuperarRoute,
   RegistroRoute: RegistroRoute,
   RestablecerRoute: RestablecerRoute,
