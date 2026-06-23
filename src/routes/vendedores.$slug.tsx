@@ -12,10 +12,10 @@ export const Route = createFileRoute("/vendedores/$slug")({
   },
   head: ({ loaderData }) => loaderData ? ({
     meta: [
-      { title: `${loaderData.seller.name} — Mi Auto Sustentable` },
-      { name: "description", content: loaderData.seller.about },
-      { property: "og:title", content: loaderData.seller.name },
-      { property: "og:description", content: loaderData.seller.about },
+      { title: `${(loaderData as { seller: import("@/lib/mock-data").Seller }).seller.name} — Mi Auto Sustentable` },
+      { name: "description", content: (loaderData as { seller: import("@/lib/mock-data").Seller }).seller.about },
+      { property: "og:title", content: (loaderData as { seller: import("@/lib/mock-data").Seller }).seller.name },
+      { property: "og:description", content: (loaderData as { seller: import("@/lib/mock-data").Seller }).seller.about },
     ],
   }) : { meta: [] },
   component: SellerPage,
@@ -45,7 +45,7 @@ function SellerPage() {
       <section className="container mx-auto px-4 py-10">
         <h2 className="mb-4 font-display text-xl font-semibold">Su oferta</h2>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {offers.map((o) => <OfferCard key={o.id} offer={o} />)}
+          {offers.map((o: import("@/lib/mock-data").Offer) => <OfferCard key={o.id} offer={o} />)}
         </div>
       </section>
     </SiteShell>

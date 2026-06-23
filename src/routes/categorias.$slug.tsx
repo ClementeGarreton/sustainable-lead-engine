@@ -12,9 +12,9 @@ export const Route = createFileRoute("/categorias/$slug")({
   },
   head: ({ loaderData }) => loaderData ? ({
     meta: [
-      { title: `${CATEGORY_LABEL[loaderData.slug]} — Mi Auto Sustentable` },
-      { name: "description", content: `Oferta de ${CATEGORY_LABEL[loaderData.slug]} en Chile.` },
-      { property: "og:title", content: `${CATEGORY_LABEL[loaderData.slug]} — Mi Auto Sustentable` },
+      { title: `${CATEGORY_LABEL[(loaderData as { slug: Category }).slug]} — Mi Auto Sustentable` },
+      { name: "description", content: `Oferta de ${CATEGORY_LABEL[(loaderData as { slug: Category }).slug]} en Chile.` },
+      { property: "og:title", content: `${CATEGORY_LABEL[(loaderData as { slug: Category }).slug]} — Mi Auto Sustentable` },
     ],
   }) : { meta: [] },
   component: Category,

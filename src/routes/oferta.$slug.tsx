@@ -17,11 +17,11 @@ export const Route = createFileRoute("/oferta/$slug")({
   },
   head: ({ loaderData }) => loaderData ? ({
     meta: [
-      { title: `${loaderData.offer.title} — Mi Auto Sustentable` },
-      { name: "description", content: loaderData.offer.hook },
-      { property: "og:title", content: loaderData.offer.title },
-      { property: "og:description", content: loaderData.offer.hook },
-      { property: "og:image", content: loaderData.offer.image },
+      { title: `${(loaderData as { offer: import("@/lib/mock-data").Offer }).offer.title} — Mi Auto Sustentable` },
+      { name: "description", content: (loaderData as { offer: import("@/lib/mock-data").Offer }).offer.hook },
+      { property: "og:title", content: (loaderData as { offer: import("@/lib/mock-data").Offer }).offer.title },
+      { property: "og:description", content: (loaderData as { offer: import("@/lib/mock-data").Offer }).offer.hook },
+      { property: "og:image", content: (loaderData as { offer: import("@/lib/mock-data").Offer }).offer.image },
     ],
   }) : { meta: [] },
   component: OfferDetail,
