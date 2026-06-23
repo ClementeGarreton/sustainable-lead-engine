@@ -37,7 +37,8 @@ export const Route = createFileRoute("/oferta/$slug")({
 });
 
 function OfferDetail() {
-  const { offer } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { offer: import("@/lib/mock-data").Offer };
+  const offer = data.offer;
   const seller = getSeller(offer.sellerId)!;
   const related = OFFERS.filter((o) => o.id !== offer.id && o.category === offer.category).slice(0, 3);
   const [open, setOpen] = useState(false);
