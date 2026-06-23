@@ -11,13 +11,6 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/space-grotesk/500.css";
-import "@fontsource/space-grotesk/600.css";
-import "@fontsource/space-grotesk/700.css";
-import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -84,15 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#0c1424" },
-      { title: "Mi Auto Sustentable — Portal chileno de electromovilidad" },
-      { name: "description", content: "Encuentra tu próximo auto eléctrico o híbrido en Chile: concesionarios, vendedores, mecánicos EV y conversiones, todos en un solo lugar." },
-      { name: "author", content: "Mi Auto Sustentable" },
-      { property: "og:title", content: "Mi Auto Sustentable" },
-      { property: "og:description", content: "Portal chileno de electromovilidad. Tu próximo auto, con energía propia." },
+      { title: "Lovable App" },
+      { name: "description", content: "LeadFlow Engine is a lead generation portal for electric and hybrid vehicles." },
+      { name: "author", content: "Lovable" },
+      { property: "og:title", content: "Lovable App" },
+      { property: "og:description", content: "LeadFlow Engine is a lead generation portal for electric and hybrid vehicles." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@miautosustentable" },
+      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:description", content: "LeadFlow Engine is a lead generation portal for electric and hybrid vehicles." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d42f588e-0b79-46cf-94b5-e46ba3b3f177/id-preview-9d772659--1f9d01fa-3738-4c1a-a771-29cf64c3290d.lovable.app-1782174913737.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d42f588e-0b79-46cf-94b5-e46ba3b3f177/id-preview-9d772659--1f9d01fa-3738-4c1a-a771-29cf64c3290d.lovable.app-1782174913737.png" },
     ],
     links: [
       {
@@ -109,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="es-CL" className="dark">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
@@ -128,7 +124,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <Toaster />
     </QueryClientProvider>
   );
 }
