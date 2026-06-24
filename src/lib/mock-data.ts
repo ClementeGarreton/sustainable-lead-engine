@@ -207,6 +207,50 @@ export const OFFERS: Offer[] = [
   },
 ];
 
+OFFERS.push(
+  {
+    id: "o7",
+    slug: "diagnostico-soh-bateria-usado",
+    title: "Médico de batería: diagnóstico SoH para auto usado",
+    hook: "Antes de comprar, sabe cuánta vida útil le queda a la batería.",
+    hidden:
+      "Informe SoH con prueba de capacidad, lectura BMS, balanceo y peritaje firmado por ingeniero certificado SEC. Recomendaciones de compra/no compra con respaldo técnico.",
+    price: 89000,
+    image: mechanic,
+    category: "medico-bateria",
+    sellerId: "s3",
+    city: "Providencia",
+    createdAt: "2025-06-22",
+    views: 530,
+    unlocks: 38,
+    seals: ["bateria-certificada"],
+  },
+  {
+    id: "o8",
+    slug: "instalacion-wallbox-domiciliario",
+    title: "Instalación domiciliaria de cargador wallbox (SEC)",
+    hook: "Cargador 7 kW + instalación certificada en Región Metropolitana.",
+    hidden:
+      "Visita técnica, materiales, conexión al tablero y declaración TE-1 incluidos. Garantía 24 meses. Coordinación con tu administradora si vives en edificio.",
+    price: 1190000,
+    image: conversion,
+    category: "instalacion-domiciliaria",
+    sellerId: "s3",
+    city: "Santiago",
+    createdAt: "2025-06-21",
+    views: 470,
+    unlocks: 31,
+    seals: ["garantia"],
+  },
+);
+
+export const SEAL_LABEL: Record<NonNullable<Offer["seals"]>[number], string> = {
+  "bateria-certificada": "Batería certificada",
+  garantia: "Con garantía",
+  historial: "Historial disponible",
+  concesionario: "Concesionario",
+};
+
 export function getOffer(slug: string) {
   return OFFERS.find((o) => o.slug === slug);
 }
