@@ -119,6 +119,8 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-12",
     views: 1240,
     unlocks: 88,
+    featured: true,
+    seals: ["concesionario", "garantia", "historial"],
   },
   {
     id: "o2",
@@ -135,6 +137,7 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-18",
     views: 980,
     unlocks: 64,
+    seals: ["bateria-certificada", "historial"],
   },
   {
     id: "o3",
@@ -199,6 +202,8 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-19",
     views: 720,
     unlocks: 53,
+    featured: true,
+    seals: ["concesionario", "garantia"],
   },
 ];
 
