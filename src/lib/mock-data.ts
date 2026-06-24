@@ -17,7 +17,9 @@ export type Category =
   | "autos-hibridos"
   | "mantenimiento"
   | "conversion"
-  | "accesorios";
+  | "accesorios"
+  | "medico-bateria"
+  | "instalacion-domiciliaria";
 
 export const CATEGORY_LABEL: Record<Category, string> = {
   "autos-electricos": "Autos eléctricos",
@@ -25,6 +27,8 @@ export const CATEGORY_LABEL: Record<Category, string> = {
   mantenimiento: "Mantenimiento EV",
   conversion: "Conversión a híbrido",
   accesorios: "Cargadores y accesorios",
+  "medico-bateria": "Médico de batería",
+  "instalacion-domiciliaria": "Instalación domiciliaria",
 };
 
 export interface Seller {
@@ -52,6 +56,8 @@ export interface Offer {
   createdAt: string;
   views: number;
   unlocks: number;
+  featured?: boolean; // marca "Oferta destacada" honesta
+  seals?: Array<"bateria-certificada" | "garantia" | "historial" | "concesionario">;
 }
 
 export const SELLERS: Seller[] = [
