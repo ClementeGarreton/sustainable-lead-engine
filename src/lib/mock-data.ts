@@ -17,7 +17,9 @@ export type Category =
   | "autos-hibridos"
   | "mantenimiento"
   | "conversion"
-  | "accesorios";
+  | "accesorios"
+  | "medico-bateria"
+  | "instalacion-domiciliaria";
 
 export const CATEGORY_LABEL: Record<Category, string> = {
   "autos-electricos": "Autos eléctricos",
@@ -25,6 +27,8 @@ export const CATEGORY_LABEL: Record<Category, string> = {
   mantenimiento: "Mantenimiento EV",
   conversion: "Conversión a híbrido",
   accesorios: "Cargadores y accesorios",
+  "medico-bateria": "Médico de batería",
+  "instalacion-domiciliaria": "Instalación domiciliaria",
 };
 
 export interface Seller {
@@ -52,6 +56,8 @@ export interface Offer {
   createdAt: string;
   views: number;
   unlocks: number;
+  featured?: boolean; // marca "Oferta destacada" honesta
+  seals?: Array<"bateria-certificada" | "garantia" | "historial" | "concesionario">;
 }
 
 export const SELLERS: Seller[] = [
@@ -113,6 +119,8 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-12",
     views: 1240,
     unlocks: 88,
+    featured: true,
+    seals: ["concesionario", "garantia", "historial"],
   },
   {
     id: "o2",
@@ -129,6 +137,7 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-18",
     views: 980,
     unlocks: 64,
+    seals: ["bateria-certificada", "historial"],
   },
   {
     id: "o3",
@@ -193,8 +202,54 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-19",
     views: 720,
     unlocks: 53,
+    featured: true,
+    seals: ["concesionario", "garantia"],
   },
 ];
+
+OFFERS.push(
+  {
+    id: "o7",
+    slug: "diagnostico-soh-bateria-usado",
+    title: "Médico de batería: diagnóstico SoH para auto usado",
+    hook: "Antes de comprar, sabe cuánta vida útil le queda a la batería.",
+    hidden:
+      "Informe SoH con prueba de capacidad, lectura BMS, balanceo y peritaje firmado por ingeniero certificado SEC. Recomendaciones de compra/no compra con respaldo técnico.",
+    price: 89000,
+    image: mechanic,
+    category: "medico-bateria",
+    sellerId: "s3",
+    city: "Providencia",
+    createdAt: "2025-06-22",
+    views: 530,
+    unlocks: 38,
+    seals: ["bateria-certificada"],
+  },
+  {
+    id: "o8",
+    slug: "instalacion-wallbox-domiciliario",
+    title: "Instalación domiciliaria de cargador wallbox (SEC)",
+    hook: "Cargador 7 kW + instalación certificada en Región Metropolitana.",
+    hidden:
+      "Visita técnica, materiales, conexión al tablero y declaración TE-1 incluidos. Garantía 24 meses. Coordinación con tu administradora si vives en edificio.",
+    price: 1190000,
+    image: conversion,
+    category: "instalacion-domiciliaria",
+    sellerId: "s3",
+    city: "Santiago",
+    createdAt: "2025-06-21",
+    views: 470,
+    unlocks: 31,
+    seals: ["garantia"],
+  },
+);
+
+export const SEAL_LABEL: Record<NonNullable<Offer["seals"]>[number], string> = {
+  "bateria-certificada": "Batería certificada",
+  garantia: "Con garantía",
+  historial: "Historial disponible",
+  concesionario: "Concesionario",
+};
 
 export function getOffer(slug: string) {
   return OFFERS.find((o) => o.slug === slug);

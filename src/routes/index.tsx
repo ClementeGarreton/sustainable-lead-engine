@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Eye, Zap, Shield, Sparkles, Gauge, BatteryCharging, Wrench } from "lucide-react";
+import {
+  ArrowRight, Eye, Sparkles, BatteryCharging, ShieldCheck,
+  Calculator, MapPin, Wrench, Stethoscope, Home, Scale, Compass,
+} from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { OfferCard } from "@/components/site/OfferCard";
 import { Button } from "@/components/ui/button";
@@ -47,14 +50,16 @@ function Index() {
                 <Link to="/oferta">Ver oferta <ArrowRight className="ml-1 h-4 w-4" /></Link>
               </Button>
               <Button asChild variant="outline" size="xl">
+                <Link to="/herramientas">Calcular ahorro</Link>
+              </Button>
+              <Button asChild variant="outline" size="xl">
                 <Link to="/precios">Soy vendedor</Link>
               </Button>
             </div>
-            <div className="flex flex-wrap gap-6 pt-4 text-sm text-muted-foreground">
-              <Stat n="+1.200" l="visitas / día" />
-              <Stat n="6" l="categorías" />
-              <Stat n="4" l="tipos de vendedor" />
-            </div>
+            <p className="pt-2 text-sm text-muted-foreground">
+              Concentramos pauta en Instagram, TikTok y Google para traerte
+              compradores cualificados. Publicidad unificada, costo compartido.
+            </p>
           </div>
           <div className="relative hidden md:block">
             <div className="relative aspect-square rounded-3xl border border-border bg-card/40 p-3 shadow-glow backdrop-blur">
@@ -62,8 +67,8 @@ function Index() {
               <div className="absolute -bottom-4 -left-4 flex items-center gap-3 rounded-2xl border border-border bg-popover px-4 py-3 shadow-card animate-pulse-glow">
                 <BatteryCharging className="h-5 w-5 text-primary" />
                 <div>
-                  <p className="text-xs text-muted-foreground">Autonomía promedio</p>
-                  <p className="font-display font-bold">+ 450 km</p>
+                  <p className="text-xs text-muted-foreground">Autonomía</p>
+                  <p className="font-display font-bold text-sm">Varía por modelo</p>
                 </div>
               </div>
             </div>
@@ -71,23 +76,67 @@ function Index() {
         </div>
       </section>
 
-      {/* QUE ENCUENTRAS */}
+      {/* NO SE POR DONDE EMPEZAR */}
       <section className="container mx-auto px-4 py-16">
-        <div className="grid gap-4 md:grid-cols-4">
-          {[
-            { i: Zap, t: "Concesionarios", d: "Stock 0 km y seminuevos verificados." },
-            { i: Gauge, t: "Vendedores", d: "Particulares y afiliados con respaldo." },
-            { i: Wrench, t: "Mecánicos EV", d: "Talleres con certificación SEC." },
-            { i: Shield, t: "Conversiones", d: "Tu auto actual, ahora híbrido." },
-          ].map((c) => (
-            <div key={c.t} className="group rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-glow">
-              <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
-                <c.i className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-lg font-semibold">{c.t}</h3>
-              <p className="text-sm text-muted-foreground">{c.d}</p>
-            </div>
-          ))}
+        <div className="mb-8 max-w-2xl">
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">Empieza por aquí</p>
+          <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl">¿No sabes por dónde empezar?</h2>
+          <p className="mt-2 text-muted-foreground">Elige lo que más se parece a tu situación. Te llevamos al paso siguiente.</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {START_CARDS.map((c) => {
+            const inner = (
+              <>
+                <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
+                  <c.icon className="h-5 w-5" />
+                </div>
+                <h3 className="font-display text-base font-semibold">{c.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
+                <p className="mt-3 text-sm text-primary">{c.cta} →</p>
+              </>
+            );
+            const cls = "group rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-glow";
+            return c.slug ? (
+              <Link key={c.title} to="/categorias/$slug" params={{ slug: c.slug }} className={cls}>{inner}</Link>
+            ) : (
+              <Link key={c.title} to="/herramientas" className={cls}>{inner}</Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* TENGO MIEDO DE... */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="rounded-3xl border border-border bg-sidebar/40 p-6 md:p-10">
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">¿Qué te preocupa?</p>
+          <h2 className="mt-2 font-display text-2xl font-bold md:text-3xl">Tengo miedo de…</h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            En electromovilidad no siempre sabes qué buscar, pero sabes qué temes.
+            Elige tu preocupación y te mostramos el camino corto.
+          </p>
+          <ul className="mt-6 grid gap-2 md:grid-cols-2">
+            {FEARS.map((f) => {
+              const inner = (
+                <>
+                  <div>
+                    <p className="text-sm font-medium">{f.label}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{f.path}</p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100" />
+                </>
+              );
+              const cls = "group flex items-center justify-between gap-4 rounded-xl border-l-2 border-transparent bg-card/40 p-4 transition-all hover:border-primary hover:bg-card";
+              return (
+                <li key={f.label}>
+                  {f.slug ? (
+                    <Link to="/categorias/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                  ) : (
+                    <Link to="/herramientas" className={cls}>{inner}</Link>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
@@ -96,7 +145,9 @@ function Index() {
         <div className="mb-6 flex items-end justify-between">
           <div>
             <h2 className="font-display text-3xl font-bold">Oferta destacada</h2>
-            <p className="text-sm text-muted-foreground">Toca una oferta para ver precio y contacto.</p>
+            <p className="text-sm text-muted-foreground">
+              Las tarjetas marcadas como <span className="font-semibold text-amber-500">"Oferta destacada"</span> son anunciantes pagos. El resto es ranking neutral.
+            </p>
           </div>
           <Button asChild variant="ghost" size="sm">
             <Link to="/oferta">Ver todas <ArrowRight className="ml-1 h-4 w-4" /></Link>
@@ -104,6 +155,39 @@ function Index() {
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((o) => <OfferCard key={o.id} offer={o} />)}
+        </div>
+      </section>
+
+      {/* ESTADO DEL MERCADO — contexto honesto */}
+      <section className="container mx-auto px-4 py-16">
+        <p className="text-xs font-semibold tracking-widest text-primary uppercase">Electromovilidad en Chile</p>
+        <h2 className="mt-2 font-display text-3xl font-bold">El mercado ya está aquí.</h2>
+        <p className="mt-2 max-w-2xl text-muted-foreground">
+          No tienes que apostar a algo marginal. Este es el contexto verificable hoy.
+        </p>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <ShieldCheck className="h-6 w-6 text-primary" />
+            <p className="mt-3 font-display font-semibold">Estrategia Nacional de Electromovilidad</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Política pública vigente del Gobierno de Chile que respalda el desarrollo del sector.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <BatteryCharging className="h-6 w-6 text-primary" />
+            <p className="mt-3 font-display font-semibold">Red pública creciendo</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Copec Voltex, Enel X Way y otros operadores expanden su red en Chile.
+              <span className="block mt-1 text-xs italic">Cifras puntuales por confirmar con la fuente.</span>
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <Calculator className="h-6 w-6 text-primary" />
+            <p className="mt-3 font-display font-semibold">Ahorro real depende de tu uso</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              No te damos un número inflado. <Link to="/herramientas" className="text-primary underline">Calcula tu ahorro</Link> con tus propios kilómetros y tarifa.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -142,11 +226,19 @@ function Index() {
   );
 }
 
-function Stat({ n, l }: { n: string; l: string }) {
-  return (
-    <div>
-      <p className="font-display text-2xl font-bold text-foreground">{n}</p>
-      <p>{l}</p>
-    </div>
-  );
-}
+const START_CARDS: Array<{ icon: typeof Calculator; title: string; desc: string; cta: string; slug?: string }> = [
+  { icon: Scale, title: "Comparar eléctrico vs híbrido", desc: "Entiende las diferencias reales de costo y uso.", cta: "Comparar ahora" },
+  { icon: Calculator, title: "Calcular cuánto ahorraría", desc: "Ingresa tu consumo actual y ve el ahorro proyectado a 5 años.", cta: "Abrir calculadora TCO" },
+  { icon: MapPin, title: "Ver cargadores cerca de mí", desc: "Mapa de puntos de carga públicos y domiciliarios en Chile.", cta: "Ver mapa", slug: "accesorios" },
+  { icon: Wrench, title: "Encontrar un mecánico EV", desc: "Talleres con experiencia certificada para tu auto eléctrico o híbrido.", cta: "Buscar taller", slug: "mantenimiento" },
+  { icon: Stethoscope, title: "Saber si la batería de un usado está sana", desc: "Antes de comprar un usado, conoce el estado real de su batería.", cta: "Diagnóstico de batería", slug: "medico-bateria" },
+  { icon: Home, title: "Cotizar instalación de cargador en casa", desc: "Instala un wallbox en tu hogar. Instaladores con certificación SEC.", cta: "Cotizar instalación", slug: "instalacion-domiciliaria" },
+];
+
+const FEARS: Array<{ label: string; path: string; slug?: string }> = [
+  { label: "Tengo miedo de quedarme sin batería", path: "Mapa de carga · Planificador de ruta · Wallbox", slug: "instalacion-domiciliaria" },
+  { label: "Tengo miedo de pagar demasiado", path: "Calculadora TCO · Comparador eléctrico vs híbrido" },
+  { label: "Tengo miedo de no entender la tecnología", path: "Glosario EV · Artículos · Quiz de compatibilidad" },
+  { label: "Tengo miedo de que me engañen con la batería", path: "Qué es SoH · Cómo se mide · Médico de batería", slug: "medico-bateria" },
+  { label: "Tengo miedo de no saber dónde repararlo", path: "Directorio mecánicos EV · Talleres certificados", slug: "mantenimiento" },
+];
