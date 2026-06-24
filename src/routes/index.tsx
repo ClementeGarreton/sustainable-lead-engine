@@ -87,7 +87,7 @@ function Index() {
           {START_CARDS.map((c) => (
             <Link
               key={c.title}
-              to={c.to}
+              to={c.to as string}
               className="group rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-glow"
             >
               <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
@@ -114,7 +114,7 @@ function Index() {
             {FEARS.map((f) => (
               <li key={f.label}>
                 <Link
-                  to={f.to}
+                  to={f.to as string}
                   className="group flex items-center justify-between gap-4 rounded-xl border-l-2 border-transparent bg-card/40 p-4 transition-all hover:border-primary hover:bg-card"
                 >
                   <div>
@@ -218,16 +218,16 @@ function Index() {
 const START_CARDS = [
   { icon: Scale, title: "Comparar eléctrico vs híbrido", desc: "Entiende las diferencias reales de costo y uso.", cta: "Comparar ahora", to: "/herramientas" },
   { icon: Calculator, title: "Calcular cuánto ahorraría", desc: "Ingresa tu consumo actual y ve el ahorro proyectado a 5 años.", cta: "Abrir calculadora TCO", to: "/herramientas" },
-  { icon: MapPin, title: "Ver cargadores cerca de mí", desc: "Mapa de puntos de carga públicos y domiciliarios en Chile.", cta: "Ver mapa", to: "/categorias/$slug" as const, params: { slug: "accesorios" } },
-  { icon: Wrench, title: "Encontrar un mecánico EV", desc: "Talleres con experiencia certificada para tu auto eléctrico o híbrido.", cta: "Buscar taller", to: "/categorias/$slug" as const, params: { slug: "mantenimiento" } },
-  { icon: Stethoscope, title: "Saber si la batería de un usado está sana", desc: "Antes de comprar un usado, conoce el estado real de su batería.", cta: "Diagnóstico de batería", to: "/categorias/$slug" as const, params: { slug: "medico-bateria" } },
-  { icon: Home, title: "Cotizar instalación de cargador en casa", desc: "Instala un wallbox en tu hogar. Instaladores con certificación SEC.", cta: "Cotizar instalación", to: "/categorias/$slug" as const, params: { slug: "instalacion-domiciliaria" } },
-] as const;
+  { icon: MapPin, title: "Ver cargadores cerca de mí", desc: "Mapa de puntos de carga públicos y domiciliarios en Chile.", cta: "Ver mapa", to: "/categorias/accesorios" },
+  { icon: Wrench, title: "Encontrar un mecánico EV", desc: "Talleres con experiencia certificada para tu auto eléctrico o híbrido.", cta: "Buscar taller", to: "/categorias/mantenimiento" },
+  { icon: Stethoscope, title: "Saber si la batería de un usado está sana", desc: "Antes de comprar un usado, conoce el estado real de su batería.", cta: "Diagnóstico de batería", to: "/categorias/medico-bateria" },
+  { icon: Home, title: "Cotizar instalación de cargador en casa", desc: "Instala un wallbox en tu hogar. Instaladores con certificación SEC.", cta: "Cotizar instalación", to: "/categorias/instalacion-domiciliaria" },
+];
 
 const FEARS = [
-  { label: "Tengo miedo de quedarme sin batería", path: "Mapa de carga · Planificador de ruta · Wallbox", to: "/herramientas" as const },
-  { label: "Tengo miedo de pagar demasiado", path: "Calculadora TCO · Comparador eléctrico vs híbrido", to: "/herramientas" as const },
-  { label: "Tengo miedo de no entender la tecnología", path: "Glosario EV · Artículos · Quiz de compatibilidad", to: "/herramientas" as const },
-  { label: "Tengo miedo de que me engañen con la batería", path: "Qué es SoH · Cómo se mide · Médico de batería", to: "/categorias/$slug" as const },
-  { label: "Tengo miedo de no saber dónde repararlo", path: "Directorio mecánicos EV · Talleres certificados", to: "/categorias/$slug" as const },
-] as const;
+  { label: "Tengo miedo de quedarme sin batería", path: "Mapa de carga · Planificador de ruta · Wallbox", to: "/categorias/instalacion-domiciliaria" },
+  { label: "Tengo miedo de pagar demasiado", path: "Calculadora TCO · Comparador eléctrico vs híbrido", to: "/herramientas" },
+  { label: "Tengo miedo de no entender la tecnología", path: "Glosario EV · Artículos · Quiz de compatibilidad", to: "/herramientas" },
+  { label: "Tengo miedo de que me engañen con la batería", path: "Qué es SoH · Cómo se mide · Médico de batería", to: "/categorias/medico-bateria" },
+  { label: "Tengo miedo de no saber dónde repararlo", path: "Directorio mecánicos EV · Talleres certificados", to: "/categorias/mantenimiento" },
+];
