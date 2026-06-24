@@ -84,20 +84,24 @@ function Index() {
           <p className="mt-2 text-muted-foreground">Elige lo que más se parece a tu situación. Te llevamos al paso siguiente.</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {START_CARDS.map((c) => (
-            <Link
-              key={c.title}
-              to={c.to as string}
-              className="group rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-glow"
-            >
-              <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
-                <c.icon className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-base font-semibold">{c.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
-              <p className="mt-3 text-sm text-primary">{c.cta} →</p>
-            </Link>
-          ))}
+          {START_CARDS.map((c) => {
+            const inner = (
+              <>
+                <div className="mb-3 grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary">
+                  <c.icon className="h-5 w-5" />
+                </div>
+                <h3 className="font-display text-base font-semibold">{c.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
+                <p className="mt-3 text-sm text-primary">{c.cta} →</p>
+              </>
+            );
+            const cls = "group rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-glow";
+            return c.slug ? (
+              <Link key={c.title} to="/categorias/$slug" params={{ slug: c.slug }} className={cls}>{inner}</Link>
+            ) : (
+              <Link key={c.title} to="/herramientas" className={cls}>{inner}</Link>
+            );
+          })}
         </div>
       </section>
 
@@ -111,20 +115,27 @@ function Index() {
             Elige tu preocupación y te mostramos el camino corto.
           </p>
           <ul className="mt-6 grid gap-2 md:grid-cols-2">
-            {FEARS.map((f) => (
-              <li key={f.label}>
-                <Link
-                  to={f.to as string}
-                  className="group flex items-center justify-between gap-4 rounded-xl border-l-2 border-transparent bg-card/40 p-4 transition-all hover:border-primary hover:bg-card"
-                >
+            {FEARS.map((f) => {
+              const inner = (
+                <>
                   <div>
                     <p className="text-sm font-medium">{f.label}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{f.path}</p>
                   </div>
                   <ArrowRight className="h-4 w-4 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100" />
-                </Link>
-              </li>
-            ))}
+                </>
+              );
+              const cls = "group flex items-center justify-between gap-4 rounded-xl border-l-2 border-transparent bg-card/40 p-4 transition-all hover:border-primary hover:bg-card";
+              return (
+                <li key={f.label}>
+                  {f.slug ? (
+                    <Link to="/categorias/$slug" params={{ slug: f.slug }} className={cls}>{inner}</Link>
+                  ) : (
+                    <Link to="/herramientas" className={cls}>{inner}</Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
@@ -215,19 +226,19 @@ function Index() {
   );
 }
 
-const START_CARDS = [
-  { icon: Scale, title: "Comparar eléctrico vs híbrido", desc: "Entiende las diferencias reales de costo y uso.", cta: "Comparar ahora", to: "/herramientas" },
-  { icon: Calculator, title: "Calcular cuánto ahorraría", desc: "Ingresa tu consumo actual y ve el ahorro proyectado a 5 años.", cta: "Abrir calculadora TCO", to: "/herramientas" },
-  { icon: MapPin, title: "Ver cargadores cerca de mí", desc: "Mapa de puntos de carga públicos y domiciliarios en Chile.", cta: "Ver mapa", to: "/categorias/accesorios" },
-  { icon: Wrench, title: "Encontrar un mecánico EV", desc: "Talleres con experiencia certificada para tu auto eléctrico o híbrido.", cta: "Buscar taller", to: "/categorias/mantenimiento" },
-  { icon: Stethoscope, title: "Saber si la batería de un usado está sana", desc: "Antes de comprar un usado, conoce el estado real de su batería.", cta: "Diagnóstico de batería", to: "/categorias/medico-bateria" },
-  { icon: Home, title: "Cotizar instalación de cargador en casa", desc: "Instala un wallbox en tu hogar. Instaladores con certificación SEC.", cta: "Cotizar instalación", to: "/categorias/instalacion-domiciliaria" },
+const START_CARDS: Array<{ icon: typeof Calculator; title: string; desc: string; cta: string; slug?: string }> = [
+  { icon: Scale, title: "Comparar eléctrico vs híbrido", desc: "Entiende las diferencias reales de costo y uso.", cta: "Comparar ahora" },
+  { icon: Calculator, title: "Calcular cuánto ahorraría", desc: "Ingresa tu consumo actual y ve el ahorro proyectado a 5 años.", cta: "Abrir calculadora TCO" },
+  { icon: MapPin, title: "Ver cargadores cerca de mí", desc: "Mapa de puntos de carga públicos y domiciliarios en Chile.", cta: "Ver mapa", slug: "accesorios" },
+  { icon: Wrench, title: "Encontrar un mecánico EV", desc: "Talleres con experiencia certificada para tu auto eléctrico o híbrido.", cta: "Buscar taller", slug: "mantenimiento" },
+  { icon: Stethoscope, title: "Saber si la batería de un usado está sana", desc: "Antes de comprar un usado, conoce el estado real de su batería.", cta: "Diagnóstico de batería", slug: "medico-bateria" },
+  { icon: Home, title: "Cotizar instalación de cargador en casa", desc: "Instala un wallbox en tu hogar. Instaladores con certificación SEC.", cta: "Cotizar instalación", slug: "instalacion-domiciliaria" },
 ];
 
-const FEARS = [
-  { label: "Tengo miedo de quedarme sin batería", path: "Mapa de carga · Planificador de ruta · Wallbox", to: "/categorias/instalacion-domiciliaria" },
-  { label: "Tengo miedo de pagar demasiado", path: "Calculadora TCO · Comparador eléctrico vs híbrido", to: "/herramientas" },
-  { label: "Tengo miedo de no entender la tecnología", path: "Glosario EV · Artículos · Quiz de compatibilidad", to: "/herramientas" },
-  { label: "Tengo miedo de que me engañen con la batería", path: "Qué es SoH · Cómo se mide · Médico de batería", to: "/categorias/medico-bateria" },
-  { label: "Tengo miedo de no saber dónde repararlo", path: "Directorio mecánicos EV · Talleres certificados", to: "/categorias/mantenimiento" },
+const FEARS: Array<{ label: string; path: string; slug?: string }> = [
+  { label: "Tengo miedo de quedarme sin batería", path: "Mapa de carga · Planificador de ruta · Wallbox", slug: "instalacion-domiciliaria" },
+  { label: "Tengo miedo de pagar demasiado", path: "Calculadora TCO · Comparador eléctrico vs híbrido" },
+  { label: "Tengo miedo de no entender la tecnología", path: "Glosario EV · Artículos · Quiz de compatibilidad" },
+  { label: "Tengo miedo de que me engañen con la batería", path: "Qué es SoH · Cómo se mide · Médico de batería", slug: "medico-bateria" },
+  { label: "Tengo miedo de no saber dónde repararlo", path: "Directorio mecánicos EV · Talleres certificados", slug: "mantenimiento" },
 ];
