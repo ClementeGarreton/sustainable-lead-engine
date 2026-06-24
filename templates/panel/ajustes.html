@@ -1,0 +1,45 @@
+{% extends "panel/base.html" %}
+{% block panel_title %}Ajustes{% endblock %}
+
+{% block panel_content %}
+<form id="settingsForm" class="grid gap-6 rounded-2xl border border-border bg-card p-6" style="max-width:42rem">
+  <section>
+    <h3 class="font-display font-semibold">Cuenta</h3>
+    <div class="grid gap-3 sm:grid-cols-2 mt-3">
+      <div><label class="label">Correo</label><input class="input" type="email" value="hola@evplus.cl"></div>
+      <div><label class="label">Teléfono</label><input class="input" value="+56 9 1111 2222"></div>
+    </div>
+  </section>
+  <section>
+    <h3 class="font-display font-semibold">Datos de facturación</h3>
+    <div class="grid gap-3 sm:grid-cols-2 mt-3">
+      <div><label class="label">Razón social</label><input class="input" value="EV+ Santiago SpA"></div>
+      <div><label class="label">RUT</label><input class="input" value="76.123.456-7"></div>
+    </div>
+  </section>
+  <section class="space-y-3">
+    <h3 class="font-display font-semibold">Notificaciones</h3>
+    {% set notif_opts = [
+      ("Avisarme por correo de nuevos leads", true),
+      ("Avisarme por WhatsApp de nuevos leads", false),
+      ("Resumen semanal de métricas", true),
+    ] %}
+    {% for label, def in notif_opts %}
+    <div class="flex items-center justify-between">
+      <label class="label" style="margin:0">{{ label }}</label>
+      <button type="button" class="switch {{ 'on' if def }}" onclick="this.classList.toggle('on')"></button>
+    </div>
+    {% endfor %}
+  </section>
+  <button type="submit" class="btn btn-hero btn-lg">Guardar</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById("settingsForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  showToast("Ajustes guardados");
+});
+</script>
+{% endblock %}

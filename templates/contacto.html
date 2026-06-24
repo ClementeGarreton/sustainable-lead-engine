@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Contacto — Mi Auto Sustentable{% endblock %}
+{% block description %}Conversemos. Escríbenos, te respondemos hoy.{% endblock %}
+
+{% block content %}
+<div class="container grid gap-12" style="padding-block:4rem;grid-template-columns:1fr">
+  <div>
+    <h1 class="font-display text-4xl font-bold">Conversemos</h1>
+    <p class="text-muted-foreground mt-3">Atendemos consultas de vendedores, compradores y prensa.</p>
+    <ul class="space-y-4 text-sm mt-8">
+      <li class="flex items-center gap-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Santiago, Chile</li>
+      <li class="flex items-center gap-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>{{ SITE.email }}</li>
+      <li class="flex items-center gap-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>{{ SITE.phonePrefix }} 9 1234 5678</li>
+    </ul>
+  </div>
+  <form id="contactForm" class="space-y-3 rounded-2xl border border-border bg-card p-6">
+    <div class="grid gap-3 sm:grid-cols-2">
+      <div><label class="label">Nombre</label><input class="input" required></div>
+      <div><label class="label">Correo</label><input class="input" required type="email"></div>
+    </div>
+    <div><label class="label">Asunto</label><input class="input" required></div>
+    <div><label class="label">Mensaje</label><textarea class="textarea" required rows="5"></textarea></div>
+    <button type="submit" class="btn btn-hero btn-lg btn-w-full">Enviar mensaje</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  showToast("Mensaje enviado, te respondemos hoy.");
+  this.reset();
+});
+</script>
+{% endblock %}

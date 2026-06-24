@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Mi panel — Comprador — Mi Auto Sustentable{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-block:3rem">
+  <h1 class="font-display text-3xl font-bold" id="buyerName">Hola</h1>
+  <p class="text-muted-foreground mt-2">Aquí queda guardada la oferta que has desbloqueado.</p>
+  <h2 class="font-display text-xl font-semibold mt-10 mb-4">Oferta desbloqueada</h2>
+  <div id="buyerOffers">
+    <div class="empty-state">
+      <h3>Aún no desbloqueas ofertas</h3>
+      <p>Ingresa al listado y elige una oferta que te interese.</p>
+      <div class="action"><a href="/oferta" class="btn btn-hero">Ver oferta</a></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function() {
+  var contact = null;
+  try { contact = JSON.parse(localStorage.getItem("mas:contact") || "null"); } catch(e) {}
+  if (contact && contact.name) {
+    document.getElementById("buyerName").textContent = "Hola, " + contact.name.split(" ")[0];
+  }
+  var unlocked = [];
+  try { unlocked = JSON.parse(localStorage.getItem("mas:unlocked") || "[]"); } catch(e) {}
+  if (unlocked.length > 0) {
+    fetch("/api/unlocked-offers", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({ids: unlocked}) })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.offers && data.offers.length > 0) {
+          var html = '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">';
+          data.offers.forEach(function(o) {
+            html += '<a href="/oferta/' + o.slug + '" class="offer-card"><div class="offer-card-img"><img src="' + o.image + '" alt="' + o.title + '"></div><div class="offer-card-body"><h3>' + o.title + '</h3><p>' + o.hook + '</p><div class="offer-card-meta"><span class="city">' + o.city + '</span><span class="price">' + o.price_fmt + '</span></div></div></a>';
+          });
+          html += '</div>';
+          document.getElementById("buyerOffers").innerHTML = html;
+        }
+      })
+      .catch(function() {});
+  }
+})();
+</script>
+{% endblock %}

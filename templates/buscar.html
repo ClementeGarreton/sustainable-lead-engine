@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Búsqueda — Mi Auto Sustentable{% endblock %}
+{% block description %}Busca autos eléctricos, híbridos y servicios EV.{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-block:3rem">
+  <h1 class="font-display text-3xl font-bold">Búsqueda</h1>
+  <form method="get" class="grid gap-3 md:grid-cols-[1fr_auto] mt-6">
+    <div class="input-wrapper">
+      <span class="input-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
+      <input class="input" name="q" value="{{ q }}" placeholder="Tesla, BYD, Santiago, conversión..." style="padding-left:2.25rem">
+    </div>
+    <select name="sort" class="select-input" onchange="this.form.submit()">
+      <option value="recientes" {{ 'selected' if sort == 'recientes' }}>Más recientes</option>
+      <option value="baratos" {{ 'selected' if sort == 'baratos' }}>Precio menor</option>
+      <option value="caros" {{ 'selected' if sort == 'caros' }}>Precio mayor</option>
+    </select>
+  </form>
+  <p class="text-sm text-muted-foreground mt-3">{{ offers|length }} resultado(s)</p>
+  <div class="mt-6">
+    {% if offers|length == 0 %}
+    <div class="empty-state">
+      <h3>Sin coincidencias</h3>
+      <p>Prueba con otra palabra clave.</p>
+    </div>
+    {% else %}
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {% for o in offers %}
+      {% with o = o %}
+      {% include "partials/_offer_card.html" %}
+      {% endwith %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

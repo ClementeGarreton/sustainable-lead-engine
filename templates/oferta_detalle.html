@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block title %}{{ offer.title }} — Mi Auto Sustentable{% endblock %}
+{% block description %}{{ offer.hook }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-block:2rem">
+  <a href="/oferta" class="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Volver a la oferta
+  </a>
+  <div class="grid gap-8 lg:grid-cols-[1.4fr_1fr] mt-6">
+    <div class="space-y-4">
+      <div class="overflow-hidden rounded-3xl border border-border shadow-card">
+        <img src="{{ offer.image }}" alt="{{ offer.title }}" style="aspect-ratio:4/3;width:100%;object-fit:cover">
+      </div>
+      <div class="flex flex-wrap gap-2 text-xs text-muted-foreground">
+        <span class="badge badge-outline badge-primary">{{ offer.category_label }}</span>
+        <span class="badge badge-outline">{{ offer.seller_type_label }}</span>
+        <span class="inline-flex items-center gap-1">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          {{ offer.city }}
+        </span>
+        <span class="inline-flex items-center gap-1">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          {{ offer.createdAt }}
+        </span>
+        <span class="inline-flex items-center gap-1">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          {{ offer.views }} vistas
+        </span>
+      </div>
+    </div>
+
+    <aside class="space-y-4">
+      <div>
+        <h1 class="font-display text-3xl font-bold leading-tight">{{ offer.title }}</h1>
+        <p class="text-lg text-muted-foreground mt-3">{{ offer.hook }}</p>
+      </div>
+
+      <!-- LOCK WALL (before unlock) -->
+      <div class="lock-wall" id="lockWall">
+        <div class="lock-wall-inner space-y-3">
+          <div class="flex items-center gap-2 text-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span class="text-xs font-semibold uppercase tracking-wider">Contenido bloqueado</span>
+          </div>
+          <p class="text-sm text-muted-foreground">Desbloquea precio de cierre, datos de contacto del vendedor y detalles de la oferta dejándonos tu correo y WhatsApp.</p>
+          <button class="btn btn-hero btn-lg btn-w-full animate-pulse-glow" id="unlockBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+            Desbloquear gratis
+          </button>
+          <p class="text-center text-xs text-muted-foreground">1 oferta cualquiera desbloquea todas en esta sesión.</p>
+        </div>
+      </div>
+
+      <!-- UNLOCKED CONTENT (hidden until unlock) -->
+      <div class="space-y-4 rounded-2xl border border-primary/40 bg-card p-6 shadow-glow" id="unlockedContent" style="display:none">
+        <div class="flex items-center gap-2 text-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span class="text-xs font-semibold uppercase tracking-wider">Desbloqueado</span>
+        </div>
+        <p class="font-display text-4xl font-bold text-gradient">{{ offer.price_fmt }}</p>
+        <div class="space-y-2 rounded-xl bg-background/40 p-4 text-sm">
+          <p class="font-semibold">{{ offer.seller.name }}</p>
+          <p class="text-muted-foreground">{{ offer.seller.about }}</p>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-3">
+          <a href="https://wa.me/56912345678?text=Hola, vi tu oferta &quot;{{ offer.title }}&quot; en Mi Auto Sustentable." class="btn btn-hero btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            WhatsApp
+          </a>
+          <a href="tel:+56912345678" class="btn btn-outline btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Llamar
+          </a>
+          <a href="mailto:vendedor@mas.cl" class="btn btn-outline btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Correo
+          </a>
+        </div>
+        <p class="text-xs text-muted-foreground">Detalle: {{ offer.hidden }}</p>
+      </div>
+
+      <a href="/vendedores/{{ offer.seller.slug }}" class="block rounded-2xl border border-border bg-card p-4 text-sm hover:border-primary/40">
+        <p class="text-xs text-muted-foreground">Publicado por</p>
+        <p class="font-display font-semibold">{{ offer.seller.name }}</p>
+        <p class="text-xs text-muted-foreground">{{ offer.seller_type_label }} · {{ offer.seller.city }} · ★ {{ offer.seller.rating }}</p>
+      </a>
+    </aside>
+  </div>
+
+  {% if related %}
+  <section class="mt-16">
+    <h2 class="font-display text-2xl font-bold mb-4">Oferta relacionada</h2>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {% for o in related %}
+      {% with o = o %}
+      {% include "partials/_offer_card.html" %}
+      {% endwith %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+
+<!-- CAPTURE MODAL -->
+<div class="modal-overlay" id="captureModal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-foreground)"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2 class="modal-title">Desbloquea esta oferta</h2>
+      <p class="modal-desc">Te contactamos solo por <strong class="text-foreground">{{ offer.title }}</strong>. Sin spam, palabra de electromovilidad.</p>
+    </div>
+    <form id="captureForm" class="space-y-3">
+      <div>
+        <label class="label">Nombre</label>
+        <input class="input" name="name" autocomplete="name" placeholder="Camila Pérez">
+        <p class="text-xs text-destructive" id="err-name" style="display:none"></p>
+      </div>
+      <div>
+        <label class="label">Correo</label>
+        <input class="input" name="email" type="email" autocomplete="email" placeholder="camila@correo.cl">
+        <p class="text-xs text-destructive" id="err-email" style="display:none"></p>
+      </div>
+      <div>
+        <label class="label">WhatsApp / Teléfono</label>
+        <input class="input" name="phone" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678">
+        <p class="text-xs text-destructive" id="err-phone" style="display:none"></p>
+      </div>
+      <button type="submit" class="btn btn-hero btn-lg btn-w-full mt-2" id="captureSubmit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        Ver contacto y precio
+      </button>
+      <p class="text-center" style="font-size:0.6875rem;color:var(--muted-foreground)">Al continuar aceptas nuestros términos y la política de privacidad (Ley 19.628).</p>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  (function() {
+    var offerId = "{{ offer.id }}";
+    var unlocked = localStorage.getItem("mas:unlocked");
+    if (unlocked) {
+      try {
+        var list = JSON.parse(unlocked);
+        if (list.indexOf(offerId) !== -1) showUnlocked();
+      } catch(e) {}
+    }
+    var modal = document.getElementById("captureModal");
+    var unlockBtn = document.getElementById("unlockBtn");
+    if (unlockBtn) unlockBtn.addEventListener("click", function() { modal.style.display = "flex"; });
+    modal.addEventListener("click", function(e) { if (e.target === modal) modal.style.display = "none"; });
+
+    document.getElementById("captureForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var data = new FormData(this);
+      var name = (data.get("name") || "").trim();
+      var email = (data.get("email") || "").trim();
+      var phone = (data.get("phone") || "").trim();
+      var ok = true;
+      function err(id, msg) { var el = document.getElementById(id); el.textContent = msg; el.style.display = msg ? "block" : "none"; if (msg) ok = false; }
+      err("err-name", name.length < 2 ? "Tu nombre, porfa." : "");
+      err("err-email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Correo no válido." : "");
+      err("err-phone", !/^[+]?[0-9 ]{8,15}$/.test(phone) ? "Teléfono no válido (ej: +56 9 1234 5678)." : "");
+      if (!ok) return;
+      var btn = document.getElementById("captureSubmit");
+      btn.disabled = true; btn.textContent = "Desbloqueando...";
+      localStorage.setItem("mas:contact", JSON.stringify({name: name, email: email, phone: phone}));
+      var list = [];
+      try { list = JSON.parse(localStorage.getItem("mas:unlocked") || "[]"); } catch(e) {}
+      if (list.indexOf(offerId) === -1) list.push(offerId);
+      localStorage.setItem("mas:unlocked", JSON.stringify(list));
+      setTimeout(function() { modal.style.display = "none"; showUnlocked(); }, 500);
+    });
+
+    function showUnlocked() {
+      var lw = document.getElementById("lockWall");
+      var uc = document.getElementById("unlockedContent");
+      if (lw) lw.style.display = "none";
+      if (uc) uc.style.display = "block";
+    }
+    window.showUnlocked = showUnlocked;
+  })();
+</script>
+{% endblock %}

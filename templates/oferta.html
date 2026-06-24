@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Oferta de electromovilidad en Chile — Mi Auto Sustentable{% endblock %}
+{% block description %}Explora autos eléctricos, híbridos, servicios EV y conversiones publicados en Mi Auto Sustentable.{% endblock %}
+
+{% block content %}
+<section class="border-b border-border bg-card/30">
+  <div class="container" style="padding-block:2.5rem">
+    <h1 class="font-display text-3xl font-bold">Toda la oferta</h1>
+    <p class="text-sm text-muted-foreground mt-2">Filtra por tipo de vendedor y categoría. Toca una oferta para desbloquear precio y contacto.</p>
+    <div class="grid gap-3 md:grid-cols-[1fr_auto_auto] mt-6">
+      <div class="input-wrapper">
+        <span class="input-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input class="input" id="offerSearch" placeholder="Buscar oferta...">
+      </div>
+      <select class="select-input" id="filterType">
+        <option value="todos">Todos los vendedores</option>
+        {% for k, v in SELLER_LABEL.items() %}
+        <option value="{{ k }}">{{ v }}</option>
+        {% endfor %}
+      </select>
+      <select class="select-input" id="filterCat">
+        <option value="todos">Todas las categorías</option>
+        {% for k, v in CATEGORY_LABEL.items() %}
+        <option value="{{ k }}">{{ v }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</section>
+
+<section class="container" style="padding-block:2.5rem">
+  <div id="offerGrid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {% for o in offers %}
+    {% with o = o %}
+    {% include "partials/_offer_card.html" %}
+    {% endwith %}
+    {% endfor %}
+  </div>
+  <p class="text-center text-xs text-muted-foreground mt-8">¿Buscas algo específico? <a href="/buscar" class="text-primary underline">Búsqueda avanzada</a></p>
+</section>
+{% endblock %}

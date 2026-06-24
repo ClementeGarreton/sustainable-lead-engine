@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Bienvenido — Mi Auto Sustentable{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width:42rem;padding-block:4rem">
+  <ol class="flex items-center justify-between gap-2 mb-10" id="stepBar"></ol>
+  <div class="rounded-2xl border border-border bg-card p-8">
+    <h1 class="font-display text-2xl font-bold" id="stepTitle"></h1>
+    <p class="text-muted-foreground mt-2" id="stepDesc"></p>
+    <div class="flex justify-between mt-8">
+      <button class="btn btn-outline" id="prevBtn" disabled>Atrás</button>
+      <button class="btn btn-hero" id="nextBtn">Continuar</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var steps = ["Cuenta", "Tu primer perfil", "Tu primera oferta", "Listo"];
+var descs = [
+  "Confirmamos los datos básicos de tu cuenta.",
+  "Completa tu perfil de vendedor para que los compradores te encuentren.",
+  "Publica tu primera oferta: título, foto y dato de gancho.",
+  "Todo listo. Ya puedes recibir tus primeros leads."
+];
+var step = 0;
+function render() {
+  var bar = document.getElementById("stepBar");
+  bar.innerHTML = "";
+  steps.forEach(function(s, i) {
+    var li = document.createElement("li");
+    li.style.cssText = "display:flex;flex:1;align-items:center;gap:0.5rem";
+    var dot = document.createElement("span");
+    dot.style.cssText = i <= step
+      ? "display:grid;height:2rem;width:2rem;place-items:center;border-radius:9999px;background:var(--primary);color:var(--primary-foreground);font-size:0.75rem;font-weight:700"
+      : "display:grid;height:2rem;width:2rem;place-items:center;border-radius:9999px;background:var(--muted);color:var(--muted-foreground);font-size:0.75rem;font-weight:700";
+    dot.innerHTML = i < step ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : (i + 1);
+    li.appendChild(dot);
+    var lbl = document.createElement("span");
+    lbl.textContent = s;
+    lbl.style.cssText = "display:none;font-size:0.875rem;" + (i <= step ? "color:var(--foreground)" : "color:var(--muted-foreground)");
+    if (window.innerWidth >= 640) lbl.style.display = "inline";
+    li.appendChild(lbl);
+    if (i < steps.length - 1) {
+      var line = document.createElement("span");
+      line.style.cssText = "margin-left:0.5rem;height:1px;flex:1;background:var(--border)";
+      li.appendChild(line);
+    }
+    bar.appendChild(li);
+  });
+  document.getElementById("stepTitle").textContent = steps[step];
+  document.getElementById("stepDesc").textContent = descs[step];
+  document.getElementById("prevBtn").disabled = step === 0;
+  var next = document.getElementById("nextBtn");
+  if (step < steps.length - 1) { next.textContent = "Continuar"; next.onclick = function() { step++; render(); }; }
+  else { next.textContent = "Ir al panel"; next.onclick = function() { window.location.href = "/panel"; }; }
+}
+render();
+document.getElementById("prevBtn").onclick = function() { if (step > 0) { step--; render(); } };
+</script>
+{% endblock %}

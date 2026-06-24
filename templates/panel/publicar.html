@@ -1,0 +1,40 @@
+{% extends "panel/base.html" %}
+{% block panel_title %}Publicar oferta{% endblock %}
+{% block panel_subtitle %}<p class="panel-subtitle">Define el gancho visible y el detalle bloqueado</p>{% endblock %}
+
+{% block panel_content %}
+<form id="publishForm" class="grid gap-5 rounded-2xl border border-border bg-card p-6" style="max-width:48rem">
+  <div><label class="label">Título</label><input class="input" required placeholder="Ej: SUV eléctrico 2024 con autonomía extendida" maxlength="120"></div>
+  <div>
+    <label class="label">Imagen</label>
+    <div class="mt-1 flex items-center justify-center rounded-xl border border-dashed border-border bg-background/40 text-muted-foreground hover:border-primary/50" style="aspect-ratio:16/8;cursor:pointer">
+      <div class="text-center">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+        <p class="text-sm mt-2">Sube o arrastra una imagen</p>
+      </div>
+    </div>
+  </div>
+  <div><label class="label">Dato de gancho visible</label><textarea class="textarea" required rows="2" placeholder="Lo que verán antes del muro de captura" maxlength="160"></textarea></div>
+  <div><label class="label">Contenido oculto (precio, contacto, detalle)</label><textarea class="textarea" required rows="4" placeholder="Lo que se desbloquea al entregar el contacto"></textarea></div>
+  <div class="grid gap-3 sm:grid-cols-2">
+    <div>
+      <label class="label">Categoría</label>
+      <select class="select-input mt-1 w-full" required>
+        {% for k, v in CATEGORY_LABEL.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}
+      </select>
+    </div>
+    <div><label class="label">Precio (CLP)</label><input class="input" required type="number" min="0" step="10000"></div>
+  </div>
+  <button type="submit" class="btn btn-hero btn-lg">Publicar</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById("publishForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  showToast("Oferta publicada");
+  setTimeout(function() { window.location.href = "/panel/oferta"; }, 800);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Administración — Mi Auto Sustentable{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-block:3rem">
+  <p class="text-xs uppercase tracking-wider text-primary">Administración</p>
+  <h1 class="font-display text-3xl font-bold mt-1">Panel global</h1>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mt-8">
+    {% for s in stats %}
+    <div class="stat-card">
+      {% if s.icon == "users" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ s.c }}"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      {% elif s.icon == "bag" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ s.c }}"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      {% elif s.icon == "chart" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ s.c }}"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+      {% elif s.icon == "card" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ s.c }}"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+      {% endif %}
+      <p class="stat-label">{{ s.label }}</p>
+      <p class="stat-value">{{ s.value }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="grid gap-6 lg:grid-cols-2 mt-10">
+    <div class="rounded-2xl border border-border bg-card p-5">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-display font-semibold">Moderación de oferta</h3>
+        <a href="/admin" class="text-xs text-primary underline">Ver todas</a>
+      </div>
+      <div class="divide-y divide-border">
+        {% for o in mod_offers %}
+        <div class="flex items-center justify-between gap-3 py-3 text-sm">
+          <div class="min-w-0">
+            <p class="truncate font-medium">{{ o.title }}</p>
+            <p class="truncate text-xs text-muted-foreground">Por {{ o.seller.name }}</p>
+          </div>
+          <span class="badge badge-primary">OK</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="rounded-2xl border border-border bg-card p-5">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-display font-semibold">Alertas</h3>
+        <a href="/admin" class="text-xs text-primary underline">Resolver</a>
+      </div>
+      <div class="divide-y divide-border">
+        <div class="flex items-center justify-between gap-3 py-3 text-sm">
+          <div class="min-w-0"><p class="truncate font-medium">Reporte de oferta engañosa</p><p class="truncate text-xs text-muted-foreground">o3 · enviado por usuario</p></div>
+          <span class="badge" style="background:oklch(0.65 0.24 25 / 0.15);color:var(--destructive)">Pendiente</span>
+        </div>
+        <div class="flex items-center justify-between gap-3 py-3 text-sm">
+          <div class="min-w-0"><p class="truncate font-medium">Pago rechazado plan Acelera</p><p class="truncate text-xs text-muted-foreground">Vendedor s2</p></div>
+          <span class="badge" style="background:oklch(0.65 0.24 25 / 0.15);color:var(--destructive)">Atender</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="mt-8 text-xs text-muted-foreground">Acceso restringido al rol administrador. <a href="/" class="text-primary underline">Salir</a></p>
+</div>
+{% endblock %}

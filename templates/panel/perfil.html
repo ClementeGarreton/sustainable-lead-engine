@@ -1,0 +1,21 @@
+{% extends "panel/base.html" %}
+{% block panel_title %}Perfil público{% endblock %}
+{% block panel_subtitle %}<p class="panel-subtitle">Lo que los compradores ven en tu página</p>{% endblock %}
+
+{% block panel_content %}
+<form id="profileForm" class="grid gap-4 rounded-2xl border border-border bg-card p-6" style="max-width:42rem">
+  <div><label class="label">Nombre comercial</label><input class="input" value="EV+ Santiago"></div>
+  <div><label class="label">Ciudad</label><input class="input" value="Santiago"></div>
+  <div><label class="label">Descripción</label><textarea class="textarea" rows="4">Concesionario multimarca con stock de autos 100% eléctricos importados directos.</textarea></div>
+  <button type="submit" class="btn btn-hero btn-lg">Guardar cambios</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById("profileForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  showToast("Perfil actualizado");
+});
+</script>
+{% endblock %}
