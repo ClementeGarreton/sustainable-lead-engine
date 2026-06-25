@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Herramientas de decisión EV — Mi Auto Sustentable</title>
+  <meta name="description" content="Calculadora TCO, simulador de autonomía y diagnóstico de compatibilidad EV. Decide con datos, no con miedo.">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+  <div class="flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container inner">
+        <a href="/" class="logo">
+          <span class="logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-foreground)"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </span>
+          <span class="logo-text">Mi Auto<span>.Sustentable</span></span>
+        </a>
+        <nav class="site-nav">
+          <a href="/" class="">Inicio</a>
+          <a href="/oferta" class="">Oferta</a>
+          <a href="/categorias" class="">Categorías</a>
+          <a href="/herramientas" class="active">Herramientas</a>
+          <a href="/precios" class="">Para vendedores</a>
+          <a href="/faq" class="">FAQ</a>
+        </nav>
+        <div class="header-actions">
+          <a href="/ingresar" class="btn btn-ghost btn-sm">Ingresar</a>
+          <a href="/registro" class="btn btn-hero btn-sm">Publicar oferta</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="/">Inicio</a>
+        <a href="/oferta">Oferta</a>
+        <a href="/categorias">Categorías</a>
+        <a href="/herramientas">Herramientas</a>
+        <a href="/precios">Para vendedores</a>
+        <a href="/faq">FAQ</a>
+        <div class="btn-row">
+          <a href="/ingresar" class="btn btn-outline btn-sm" style="flex:1">Ingresar</a>
+          <a href="/registro" class="btn btn-hero btn-sm" style="flex:1">Publicar</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex-1">
+      
+<section class="container" style="padding-block:3rem">
+  <p class="text-xs font-semibold tracking-widest text-primary uppercase">Herramientas de decisión</p>
+  <h1 class="font-display text-3xl font-bold mt-2">Decide con datos, no con miedo.</h1>
+  <p class="text-muted-foreground mt-3" style="max-width:42rem">Tres herramientas neutrales para resolver las dudas reales: cuánto ahorrarías, si tu uso diario cabe en una carga y si un eléctrico es para ti hoy.</p>
+
+  <div class="tabs-list cols-3 mt-10" style="max-width:42rem">
+    <button class="tab-trigger active" data-tab="tco">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+      Calculadora TCO
+    </button>
+    <button class="tab-trigger" data-tab="autonomia">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+      Autonomía
+    </button>
+    <button class="tab-trigger" data-tab="diagnostico">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
+      Diagnóstico EV
+    </button>
+  </div>
+
+  <!-- TCO -->
+  <div class="tab-content active mt-6" id="tab-tco">
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="space-y-5 rounded-2xl border border-border bg-card p-6">
+        <h2 class="font-display text-xl font-semibold">Tus datos reales</h2>
+        <div>
+          <label class="label">Kilómetros por mes: <span class="font-mono text-primary" id="tcoKmVal">1.500 km</span></label>
+          <input type="range" id="tcoKm" min="200" max="4000" step="100" value="1500" class="mt-3" style="--val:36%">
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="label" for="tcoBencina">Precio bencina (CLP/L)</label>
+            <input class="input mt-1" id="tcoBencina" type="number" value="1280">
+          </div>
+          <div>
+            <label class="label" for="tcoKwh">Tarifa eléctrica (CLP/kWh)</label>
+            <input class="input mt-1" id="tcoKwh" type="number" value="160">
+          </div>
+        </div>
+        <div>
+          <label class="label">Consumo de tu auto actual: <span class="font-mono text-primary" id="tcoGasVal">12 L/100km</span></label>
+          <input type="range" id="tcoGas" min="5" max="20" step="0.5" value="12" class="mt-3" style="--val:47%">
+        </div>
+        <p class="text-xs text-muted-foreground">Usamos un consumo EV referencial de 16 kWh/100km. El ahorro real depende del modelo y tus hábitos.</p>
+      </div>
+      <div class="space-y-5 rounded-2xl border border-primary/30 bg-primary/5 p-6">
+        <h2 class="font-display text-xl font-semibold">En 5 años con un auto eléctrico ahorrarías</h2>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-baseline justify-between gap-4 border-b border-border pb-3">
+            <span class="text-muted-foreground">En combustible</span>
+            <span class="font-mono text-lg font-semibold" id="tcoFuel">$0</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-4 border-b border-border pb-3">
+            <span class="text-muted-foreground">En mantención (estimado)</span>
+            <span class="font-mono text-lg font-semibold" id="tcoMaint">$0</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-4 pt-2">
+            <span class="font-semibold">Total estimado</span>
+            <span class="font-mono text-2xl font-bold text-primary" id="tcoTotal">$0</span>
+          </li>
+        </ul>
+        <p class="text-xs text-muted-foreground">Estos son valores estimados. El ahorro real depende de tus hábitos de uso, el modelo que elijas y las tarifas vigentes.</p>
+        <a href="/oferta" class="btn btn-hero btn-lg btn-w-full">Ver autos eléctricos que se ajustan a tu ahorro →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTONOMIA -->
+  <div class="tab-content mt-6" id="tab-autonomia">
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="space-y-5 rounded-2xl border border-border bg-card p-6">
+        <h2 class="font-display text-xl font-semibold">Tu uso diario</h2>
+        <div>
+          <label class="label" for="autoCity">Ciudad</label>
+          <select id="autoCity" class="select-input mt-1 w-full">
+            <option>Santiago</option><option>Viña del Mar</option><option>Concepción</option><option>Antofagasta</option><option>La Serena</option><option>Temuco</option><option>Puerto Montt</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">Distancia diaria: <span class="font-mono text-primary" id="autoDailyVal">45 km</span></label>
+          <input type="range" id="autoDaily" min="5" max="200" step="5" value="45" class="mt-3" style="--val:21%">
+        </div>
+        <p class="text-xs text-muted-foreground">Considera ida y vuelta + recorridos cortos. La autonomía real en ciudad varía con el clima y el aire acondicionado.</p>
+      </div>
+      <div class="space-y-3 rounded-2xl border border-border bg-card p-6">
+        <h2 class="font-display text-xl font-semibold" id="autoTitle">Modelos que cubren tu uso en Santiago</h2>
+        <ul class="space-y-2 text-sm" id="autoList"></ul>
+        <a href="/categorias/instalacion-domiciliaria" class="btn btn-outline btn-sm btn-w-full mt-3">Cotizar cargador en casa →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIAGNOSTICO -->
+  <div class="tab-content mt-6" id="tab-diagnostico">
+    <div id="diagQuiz" class="mx-auto rounded-2xl border border-border bg-card p-8" style="max-width:42rem">
+      <div class="flex items-center justify-between text-xs text-muted-foreground mb-4">
+        <span id="diagStep">Pregunta 1 de 5</span>
+        <span id="diagPct">0%</span>
+      </div>
+      <div class="progress-bar mb-6"><div class="progress-fill" id="diagBar" style="width:0%"></div></div>
+      <h2 class="font-display text-xl font-semibold" id="diagQuestion"></h2>
+      <div class="grid gap-2 mt-6" id="diagOptions"></div>
+      <p class="text-xs text-muted-foreground mt-6">Este diagnóstico es un asesor neutral. Un resultado "mejor esperar" es válido y honesto.</p>
+    </div>
+    <div id="diagResult" style="display:none"></div>
+  </div>
+</section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="/" class="logo">
+            <span class="logo-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-foreground)"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </span>
+            <span class="logo-text">Mi Auto<span>.Sustentable</span></span>
+          </a>
+          <p class="text-sm text-muted-foreground mt-3">Portal chileno de electromovilidad. Un solo lugar para encontrar tu próximo auto eléctrico o híbrido.</p>
+          <div class="footer-social">
+            <a href="https://instagram.com/miautosustentable" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://tiktok.com/@miautosustentable" aria-label="TikTok">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.06v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.3 0 .59.04.86.13V9.4a6.84 6.84 0 0 0-1-.05A5.93 5.93 0 0 0 4 20.1a5.93 5.93 0 0 0 10.17-4.07V8.69a7.86 7.86 0 0 0 4.58 1.46V7.09a4.85 4.85 0 0 1-.16-.4z"/></svg>
+            </a>
+            <a href="mailto:hola@miautosustentable.com" aria-label="Correo">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="/oferta">Oferta</a></li>
+            <li><a href="/categorias">Categorías</a></li>
+            <li><a href="/buscar">Búsqueda</a></li>
+            <li><a href="/faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Vendedores</h4>
+          <ul>
+            <li><a href="/registro">Publicar</a></li>
+            <li><a href="/precios">Planes</a></li>
+            <li><a href="/panel">Panel</a></li>
+            <li><a href="/soporte">Soporte</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/sobre-nosotros">Sobre nosotros</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+            <li><a href="/terminos">Términos</a></li>
+            <li><a href="/privacidad">Privacidad</a></li>
+            <li><a href="/cookies">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Mi Auto Sustentable — Santiago, Chile.</p>
+        <p>Hecho con energía limpia</p>
+      </div>
+    </footer>
+
+    <!-- COOKIE BANNER -->
+    <div class="cookie-banner" id="cookieBanner" style="display:none">
+      <div class="container cookie-inner">
+        <p>Usamos cookies para medir el origen del tráfico desde Instagram, TikTok y Google. Lee nuestra <a href="/cookies" class="text-primary underline">política de cookies</a>.</p>
+        <div class="cookie-actions">
+          <button class="btn btn-ghost btn-sm" id="cookieReject">Solo esenciales</button>
+          <button class="btn btn-hero btn-sm" id="cookieAccept">Aceptar todas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;display:flex;flex-direction:column;gap:0.5rem;"></div>
+
+  <script src="/static/scripts.js"></script>
+  
+<script src="/static/tools.js"></script>
+
+</body>
+</html>
