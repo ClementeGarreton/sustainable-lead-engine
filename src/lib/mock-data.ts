@@ -36,6 +36,8 @@ export interface Seller {
   rating: number;
   avatar: string;
   about: string;
+  verificado?: boolean;
+  esFundador?: boolean;
 }
 
 export interface Offer {
@@ -52,6 +54,10 @@ export interface Offer {
   createdAt: string;
   views: number;
   unlocks: number;
+  destacada?: boolean;
+  conGarantia?: boolean;
+  bateriaCert?: boolean;
+  esDemo?: boolean;
 }
 
 export const SELLERS: Seller[] = [
@@ -64,6 +70,8 @@ export const SELLERS: Seller[] = [
     rating: 4.8,
     avatar: "",
     about: "Concesionario multimarca con stock de autos 100% eléctricos importados directos.",
+    verificado: true,
+    esFundador: true,
   },
   {
     id: "s2",
@@ -74,6 +82,7 @@ export const SELLERS: Seller[] = [
     rating: 4.6,
     avatar: "",
     about: "Vendedora afiliada con stock de SUV eléctricos seminuevos verificados.",
+    verificado: false,
   },
   {
     id: "s3",
@@ -84,6 +93,8 @@ export const SELLERS: Seller[] = [
     rating: 4.9,
     avatar: "",
     about: "Mecánica especializada en baterías de litio y diagnóstico eléctrico.",
+    verificado: true,
+    esFundador: true,
   },
   {
     id: "s4",
@@ -94,6 +105,7 @@ export const SELLERS: Seller[] = [
     rating: 4.7,
     avatar: "",
     about: "Conversión de autos a tracción híbrida con kits homologados.",
+    verificado: true,
   },
 ];
 
