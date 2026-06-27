@@ -24,7 +24,6 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
 import { Route as IngresarRouteImport } from './routes/ingresar'
-import { Route as HerramientasRouteImport } from './routes/herramientas'
 import { Route as GraciasRouteImport } from './routes/gracias'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as CookiesRouteImport } from './routes/cookies'
@@ -120,11 +119,6 @@ const MantenimientoRoute = MantenimientoRouteImport.update({
 const IngresarRoute = IngresarRouteImport.update({
   id: '/ingresar',
   path: '/ingresar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HerramientasRoute = HerramientasRouteImport.update({
-  id: '/herramientas',
-  path: '/herramientas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GraciasRoute = GraciasRouteImport.update({
@@ -244,7 +238,6 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
-  '/herramientas': typeof HerramientasRoute
   '/ingresar': typeof IngresarRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
@@ -283,7 +276,6 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
-  '/herramientas': typeof HerramientasRoute
   '/ingresar': typeof IngresarRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
@@ -322,7 +314,6 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
-  '/herramientas': typeof HerramientasRoute
   '/ingresar': typeof IngresarRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
@@ -363,7 +354,6 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/gracias'
-    | '/herramientas'
     | '/ingresar'
     | '/mantenimiento'
     | '/oferta'
@@ -402,7 +392,6 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/gracias'
-    | '/herramientas'
     | '/ingresar'
     | '/mantenimiento'
     | '/oferta'
@@ -440,7 +429,6 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/gracias'
-    | '/herramientas'
     | '/ingresar'
     | '/mantenimiento'
     | '/oferta'
@@ -480,7 +468,6 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
   GraciasRoute: typeof GraciasRoute
-  HerramientasRoute: typeof HerramientasRoute
   IngresarRoute: typeof IngresarRoute
   MantenimientoRoute: typeof MantenimientoRoute
   OfertaRoute: typeof OfertaRouteWithChildren
@@ -604,13 +591,6 @@ declare module '@tanstack/react-router' {
       path: '/ingresar'
       fullPath: '/ingresar'
       preLoaderRoute: typeof IngresarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/herramientas': {
-      id: '/herramientas'
-      path: '/herramientas'
-      fullPath: '/herramientas'
-      preLoaderRoute: typeof HerramientasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gracias': {
@@ -821,7 +801,6 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
   GraciasRoute: GraciasRoute,
-  HerramientasRoute: HerramientasRoute,
   IngresarRoute: IngresarRoute,
   MantenimientoRoute: MantenimientoRoute,
   OfertaRoute: OfertaRouteWithChildren,

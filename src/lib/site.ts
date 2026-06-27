@@ -9,5 +9,5 @@ export const SITE = {
   email: "hola@miautosustentable.com",
   ig: "https://instagram.com/miautosustentable",
   tk: "https://tiktok.com/@miautosustentable",
-  yr: 2025,
+  yr: new Date().getFullYear(),
 };
