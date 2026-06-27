@@ -125,6 +125,9 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-12",
     views: 1240,
     unlocks: 88,
+    destacada: true,
+    conGarantia: true,
+    esDemo: true,
   },
   {
     id: "o2",
@@ -141,6 +144,8 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-18",
     views: 980,
     unlocks: 64,
+    bateriaCert: true,
+    esDemo: true,
   },
   {
     id: "o3",
@@ -157,6 +162,9 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-20",
     views: 612,
     unlocks: 41,
+    destacada: true,
+    bateriaCert: true,
+    esDemo: true,
   },
   {
     id: "o4",
@@ -173,6 +181,8 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-08",
     views: 1810,
     unlocks: 120,
+    conGarantia: true,
+    esDemo: true,
   },
   {
     id: "o5",
@@ -189,6 +199,9 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-15",
     views: 410,
     unlocks: 22,
+    destacada: true,
+    conGarantia: true,
+    esDemo: true,
   },
   {
     id: "o6",
@@ -205,6 +218,9 @@ export const OFFERS: Offer[] = [
     createdAt: "2025-06-19",
     views: 720,
     unlocks: 53,
+    destacada: true,
+    conGarantia: true,
+    esDemo: true,
   },
 ];
 
@@ -223,6 +239,80 @@ export function offersBySeller(id: string) {
 export function offersByCategory(cat: string) {
   return OFFERS.filter((o) => o.category === cat);
 }
+
+export function destacadas() {
+  return OFFERS.filter((o) => o.destacada).sort((a, b) => {
+    const af = getSeller(a.sellerId)?.esFundador ? 1 : 0;
+    const bf = getSeller(b.sellerId)?.esFundador ? 1 : 0;
+    return bf - af;
+  });
+}
+
+// Shorts del carrusel (educativos)
+export interface Short {
+  id: string;
+  titulo: string;
+  plataforma: "instagram" | "tiktok" | "youtube";
+  url: string;
+  serie: string;
+  inciso?: string;
+}
+
+export const SHORTS: Short[] = [
+  { id: "sh1", titulo: "¿Vives en edificio? Cómo instalar tu cargador", plataforma: "youtube", url: "#", serie: "que_hacer", inciso: "Conecta con un instalador SEC certificado en tu comuna." },
+  { id: "sh2", titulo: "10 preguntas que le hago a Google sobre mi EV", plataforma: "tiktok", url: "#", serie: "10_preguntas", inciso: "Respuesta corta y honesta, sin tecnicismos." },
+  { id: "sh3", titulo: "Híbrido vs eléctrico: ¿cuál te conviene hoy?", plataforma: "instagram", url: "#", serie: "que_hacer", inciso: "Hazte el test de compatibilidad gratis." },
+  { id: "sh4", titulo: "¿Cuánto sube tu cuenta de luz cargando en casa?", plataforma: "youtube", url: "#", serie: "10_preguntas", inciso: "Mídelo con la calculadora de ahorro." },
+  { id: "sh5", titulo: "Médico de batería: cómo saber si está sana", plataforma: "tiktok", url: "#", serie: "que_hacer", inciso: "Reserva diagnóstico con un taller verificado." },
+];
+
+// Constantes editables para calculadoras
+export const CALC = {
+  precioBencina: 1350,      // CLP por litro (referencial, editar)
+  precioKwh: 165,           // CLP por kWh (referencial, editar)
+  consumoKwhPorKm: 0.18,    // promedio EV liviano
+};
+
+// Planes v0.1.0: Básico / Preferencial / Empresa
+export const PLANES_VENDEDORES = [
+  {
+    id: "basico",
+    nombre: "Básico",
+    para: "Negocio recién formado",
+    incluye: [
+      "Aparición en el portal con perfil propio",
+      "Suscripción baja mensual",
+      "Leads y clics se cargan aparte el mes siguiente",
+      "Etiqueta de 'Verificado' tras validación del equipo",
+    ],
+    cta: "Quiero el Básico",
+  },
+  {
+    id: "preferencial",
+    nombre: "Preferencial",
+    para: "Quiere más visibilidad",
+    incluye: [
+      "Todo lo del plan Básico",
+      "Aparición como destacado (marcado 'Publicidad' siempre)",
+      "Asiento permanente en la portada si eres socio fundador",
+      "Estadísticas mensuales de tu perfil",
+    ],
+    cta: "Quiero el Preferencial",
+    destacado: true,
+  },
+  {
+    id: "empresa",
+    nombre: "Empresa / Flotas",
+    para: "Volumen, B2B",
+    incluye: [
+      "Atención de flotas y varios cargadores",
+      "Plan de mantención",
+      "Trato directo con el equipo",
+      "Fase posterior — coordinación manual",
+    ],
+    cta: "Conversemos",
+  },
+];
 
 export const PLANS = [
   {
