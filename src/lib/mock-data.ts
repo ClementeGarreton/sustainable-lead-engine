@@ -314,59 +314,11 @@ export const PLANES_VENDEDORES = [
   },
 ];
 
-// Legacy: usado por la pasarela simulada de /checkout. v0.1.0 coordina contrataciones manualmente.
+// Legacy: usado por la pasarela simulada de /checkout (orfana en v0.1.0).
 export const PLANS = [
   { id: "basico", name: "Básico", monthly: 0, leads: 0, extra: 0 },
   { id: "preferencial", name: "Preferencial", monthly: 0, leads: 0, extra: 0 },
   { id: "empresa", name: "Empresa", monthly: 0, leads: 0, extra: 0 },
-];
-
-export const PLANS = [
-  {
-    id: "starter",
-    name: "Despegue",
-    monthly: 39000,
-    leads: 15,
-    extra: 3500,
-    reach: "Alcance local en Instagram",
-    features: [
-      "Publicaciones ilimitadas",
-      "15 leads incluidos / mes",
-      "$3.500 por lead extra",
-      "Panel de bandeja con datos completos",
-    ],
-  },
-  {
-    id: "pro",
-    name: "Acelera",
-    monthly: 89000,
-    leads: 50,
-    extra: 2500,
-    reach: "Alcance nacional en Instagram + TikTok",
-    features: [
-      "Todo Despegue",
-      "50 leads incluidos / mes",
-      "$2.500 por lead extra",
-      "Perfil destacado en categorías",
-      "Notificación instantánea por correo",
-    ],
-    popular: true,
-  },
-  {
-    id: "premium",
-    name: "Tracción Total",
-    monthly: 189000,
-    leads: 150,
-    extra: 1800,
-    reach: "Alcance nacional + Google Ads",
-    features: [
-      "Todo Acelera",
-      "150 leads incluidos / mes",
-      "$1.800 por lead extra",
-      "Asesoría 1:1 mensual",
-      "API de integración a CRM",
-    ],
-  },
 ];
 
 export function formatCLP(n: number) {
