@@ -13,7 +13,6 @@ import { Route as VerificarCorreoRouteImport } from './routes/verificar-correo'
 import { Route as TerminosRouteImport } from './routes/terminos'
 import { Route as SoporteRouteImport } from './routes/soporte'
 import { Route as SobreNosotrosRouteImport } from './routes/sobre-nosotros'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RestablecerRouteImport } from './routes/restablecer'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as RecuperarRouteImport } from './routes/recuperar'
@@ -24,6 +23,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as MantenimientoRouteImport } from './routes/mantenimiento'
 import { Route as IngresarRouteImport } from './routes/ingresar'
+import { Route as HerramientasRouteImport } from './routes/herramientas'
 import { Route as GraciasRouteImport } from './routes/gracias'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as CookiesRouteImport } from './routes/cookies'
@@ -64,11 +64,6 @@ const SoporteRoute = SoporteRouteImport.update({
 const SobreNosotrosRoute = SobreNosotrosRouteImport.update({
   id: '/sobre-nosotros',
   path: '/sobre-nosotros',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RestablecerRoute = RestablecerRouteImport.update({
@@ -119,6 +114,11 @@ const MantenimientoRoute = MantenimientoRouteImport.update({
 const IngresarRoute = IngresarRouteImport.update({
   id: '/ingresar',
   path: '/ingresar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HerramientasRoute = HerramientasRouteImport.update({
+  id: '/herramientas',
+  path: '/herramientas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GraciasRoute = GraciasRouteImport.update({
@@ -238,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
+  '/herramientas': typeof HerramientasRoute
   '/ingresar': typeof IngresarRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
@@ -248,7 +249,6 @@ export interface FileRoutesByFullPath {
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
   '/terminos': typeof TerminosRoute
@@ -276,6 +276,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
+  '/herramientas': typeof HerramientasRoute
   '/ingresar': typeof IngresarRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
@@ -285,7 +286,6 @@ export interface FileRoutesByTo {
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
   '/terminos': typeof TerminosRoute
@@ -314,6 +314,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/gracias': typeof GraciasRoute
+  '/herramientas': typeof HerramientasRoute
   '/ingresar': typeof IngresarRoute
   '/mantenimiento': typeof MantenimientoRoute
   '/oferta': typeof OfertaRouteWithChildren
@@ -324,7 +325,6 @@ export interface FileRoutesById {
   '/recuperar': typeof RecuperarRoute
   '/registro': typeof RegistroRoute
   '/restablecer': typeof RestablecerRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/soporte': typeof SoporteRoute
   '/terminos': typeof TerminosRoute
@@ -354,6 +354,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/gracias'
+    | '/herramientas'
     | '/ingresar'
     | '/mantenimiento'
     | '/oferta'
@@ -364,7 +365,6 @@ export interface FileRouteTypes {
     | '/recuperar'
     | '/registro'
     | '/restablecer'
-    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soporte'
     | '/terminos'
@@ -392,6 +392,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/gracias'
+    | '/herramientas'
     | '/ingresar'
     | '/mantenimiento'
     | '/oferta'
@@ -401,7 +402,6 @@ export interface FileRouteTypes {
     | '/recuperar'
     | '/registro'
     | '/restablecer'
-    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soporte'
     | '/terminos'
@@ -429,6 +429,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/faq'
     | '/gracias'
+    | '/herramientas'
     | '/ingresar'
     | '/mantenimiento'
     | '/oferta'
@@ -439,7 +440,6 @@ export interface FileRouteTypes {
     | '/recuperar'
     | '/registro'
     | '/restablecer'
-    | '/sitemap.xml'
     | '/sobre-nosotros'
     | '/soporte'
     | '/terminos'
@@ -468,6 +468,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
   GraciasRoute: typeof GraciasRoute
+  HerramientasRoute: typeof HerramientasRoute
   IngresarRoute: typeof IngresarRoute
   MantenimientoRoute: typeof MantenimientoRoute
   OfertaRoute: typeof OfertaRouteWithChildren
@@ -478,7 +479,6 @@ export interface RootRouteChildren {
   RecuperarRoute: typeof RecuperarRoute
   RegistroRoute: typeof RegistroRoute
   RestablecerRoute: typeof RestablecerRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreNosotrosRoute: typeof SobreNosotrosRoute
   SoporteRoute: typeof SoporteRoute
   TerminosRoute: typeof TerminosRoute
@@ -514,13 +514,6 @@ declare module '@tanstack/react-router' {
       path: '/sobre-nosotros'
       fullPath: '/sobre-nosotros'
       preLoaderRoute: typeof SobreNosotrosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/restablecer': {
@@ -591,6 +584,13 @@ declare module '@tanstack/react-router' {
       path: '/ingresar'
       fullPath: '/ingresar'
       preLoaderRoute: typeof IngresarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/herramientas': {
+      id: '/herramientas'
+      path: '/herramientas'
+      fullPath: '/herramientas'
+      preLoaderRoute: typeof HerramientasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gracias': {
@@ -801,6 +801,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
   GraciasRoute: GraciasRoute,
+  HerramientasRoute: HerramientasRoute,
   IngresarRoute: IngresarRoute,
   MantenimientoRoute: MantenimientoRoute,
   OfertaRoute: OfertaRouteWithChildren,
@@ -811,7 +812,6 @@ const rootRouteChildren: RootRouteChildren = {
   RecuperarRoute: RecuperarRoute,
   RegistroRoute: RegistroRoute,
   RestablecerRoute: RestablecerRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreNosotrosRoute: SobreNosotrosRoute,
   SoporteRoute: SoporteRoute,
   TerminosRoute: TerminosRoute,
