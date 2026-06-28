@@ -314,6 +314,13 @@ export const PLANES_VENDEDORES = [
   },
 ];
 
+// Legacy: usado por la pasarela simulada de /checkout. v0.1.0 coordina contrataciones manualmente.
+export const PLANS = [
+  { id: "basico", name: "Básico", monthly: 0, leads: 0, extra: 0 },
+  { id: "preferencial", name: "Preferencial", monthly: 0, leads: 0, extra: 0 },
+  { id: "empresa", name: "Empresa", monthly: 0, leads: 0, extra: 0 },
+];
+
 export const PLANS = [
   {
     id: "starter",
